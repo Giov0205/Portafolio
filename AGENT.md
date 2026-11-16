@@ -181,8 +181,8 @@ Edita `skillGroups`; el nivel es 0–100 y se refleja en la barra y en
 - **Rutas absolutas del sistema**: el proyecto está en
   `C:\Users\elbry\Documents\PortafolioTactico`. Usa esa ruta al ejecutar
   comandos.
-- **Git**: el proyecto puede no estar inicializado como repositorio. No asumas
-  que existe un remoto.
+- **Git**: el proyecto está inicializado en la rama `main` con un commit inicial
+  y **sin remoto**. No asumas que existe un repositorio en GitHub.
 
 ## 12. Despliegue
 

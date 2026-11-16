@@ -216,6 +216,10 @@ npm run preview
 5. Pulsa **Create repository**.
 6. En la terminal, dentro de la carpeta del proyecto:
 
+> Este proyecto ya viene con un repositorio Git local y un primer commit. Si es
+> tu caso, sáltate `git init`, `add` y `commit` y ve directo a los comandos de
+> `remote` y `push`.
+
 ```bash
 git init
 git add .

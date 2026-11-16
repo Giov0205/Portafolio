@@ -105,11 +105,12 @@ Marcados en `src/data/portfolio.ts`:
 ## 6. Despliegue
 
 - **No desplegado todavía.** No hay URL pública ni repositorio remoto.
+- Repositorio Git local **inicializado** en la rama `main`, con un commit
+  inicial (`Portafolio tactico con Astro y Tailwind`). Falta crear el repositorio
+  en GitHub y agregar el remoto.
 - `netlify.toml` listo (build `npm run build`, publish `dist`, Node 22).
 - Vercel detecta Astro automáticamente.
 - Pasos completos en `README.md`, sección 7.
-- Falta: `git init`, crear repo en GitHub y hacer el primer push (si no se ha
-  hecho; ver sección 9).
 
 ---
 
@@ -157,4 +158,7 @@ Marcados en `src/data/portfolio.ts`:
 - Se generaron placeholders SVG para fondo, perfil y cinco proyectos.
 - Se validó con `astro check` (0 errores) y con capturas en seis anchos.
 - Se documentó en `README.md`, `AGENT.md` y este `MEMORY.md`.
+- Se inicializó Git en la rama `main` con un commit inicial. Sin remoto todavía.
+- Verificación final con Playwright: hover, Enter, Escape, foco, hash, título y
+  0 errores de consola.
 - Pendiente inmediato: reemplazar placeholders y publicar.
