@@ -1,6 +1,7 @@
 ---
 import SectionShell from "./SectionShell.astro";
 import { site, socials } from "../data/portfolio";
+import PadIcon from "./PadIcon.astro";
 
 const isExternal = (href: string) => href.startsWith("http");
 ---
@@ -9,14 +10,13 @@ const isExternal = (href: string) => href.startsWith("http");
   id="contacto"
   index="04"
   title="CONTACTO Y REDES"
-  eyebrow="SECCIÓN 04 — CANAL DE COMUNICACIÓN"
-  breadcrumb="TAC-COM // EXPEDIENTE 04"
+  eyebrow="MÓDULO 04 — CONTACTO"
+  breadcrumb="SISTEMA // MÓDULO 04"
 >
   <div class="grid gap-8 lg:grid-cols-[1fr_320px] lg:gap-12">
     <div>
       <p class="max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
         ¿Tienes una idea, un proyecto o una vacante? Escríbeme y coordinamos.
-        Respondo normalmente en menos de 24 horas.
       </p>
 
       <ul class="mt-6 grid gap-3 sm:grid-cols-2" role="list">
@@ -93,8 +93,13 @@ const isExternal = (href: string) => href.startsWith("http");
         }
       </ul>
 
-      <p class="mt-5 text-xs leading-relaxed text-ash">
-        También puedes copiar mi correo directamente:{" "}
+      <button type="button" class="btn-hud mt-5" data-copy-email>
+        <PadIcon type="square" class="pad-inline" />
+        COPIAR CORREO
+      </button>
+
+      <p class="mt-4 text-xs leading-relaxed text-ash">
+        O escríbeme directamente a:{" "}
         <a
           class="text-white underline decoration-accent/60 decoration-2 underline-offset-4 hover:text-accent-soft"
           href={`mailto:${site.email}`}>{site.email}</a
@@ -111,18 +116,14 @@ const isExternal = (href: string) => href.startsWith("http");
         ABIERTO
       </p>
       <p class="mt-2 text-sm leading-relaxed text-ash">
-        Disponible para colaboraciones, prácticas profesionales y proyectos
-        freelance.
+        Disponible para prácticas profesionales, colaboraciones y
+        proyectos.
       </p>
 
       <div class="mt-5 space-y-3 border-t border-dashed border-white/15 pt-4">
         <div class="flex items-center justify-between gap-3">
           <span class="hud-label">UBICACIÓN</span>
           <span class="text-xs uppercase tracking-[0.12em] text-white/85">{site.city}</span>
-        </div>
-        <div class="flex items-center justify-between gap-3">
-          <span class="hud-label">RESPUESTA</span>
-          <span class="text-xs uppercase tracking-[0.12em] text-white/85">&lt; 24 H</span>
         </div>
         <div class="flex items-center justify-between gap-3">
           <span class="hud-label">ID</span>

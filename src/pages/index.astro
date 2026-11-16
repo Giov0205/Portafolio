@@ -8,6 +8,7 @@ import AboutSection from "../components/AboutSection.astro";
 import ProjectsSection from "../components/ProjectsSection.astro";
 import SkillsSection from "../components/SkillsSection.astro";
 import ContactSection from "../components/ContactSection.astro";
+import ButtonPrompts from "../components/ButtonPrompts.astro";
 import { site, ui } from "../data/portfolio";
 ---
 
@@ -52,6 +53,8 @@ import { site, ui } from "../data/portfolio";
 
     <p class="sr-only" role="status" aria-live="polite" data-announcer></p>
   </div>
+
+  <ButtonPrompts />
 </Layout>
 
 <script>

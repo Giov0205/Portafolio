@@ -4,7 +4,7 @@
       <stop offset="0" stop-color="#151a23"/><stop offset="1" stop-color="#07090d"/>
     </linearGradient>
     <linearGradient id="accent" x1="0" y1="1" x2="0" y2="0">
-      <stop offset="0" stop-color="#7a101c"/><stop offset="1" stop-color="#ff4757"/>
+      <stop offset="0" stop-color="#0e7490"/><stop offset="1" stop-color="#67e8f9"/>
     </linearGradient>
     <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
       <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.05"/>
@@ -16,7 +16,7 @@
 
   <!-- Sidebar -->
   <rect x="40" y="40" width="120" height="370" fill="#0e1117" stroke="#ffffff" stroke-opacity="0.08"/>
-  <g fill="#e11d2e">
+  <g fill="#22d3ee">
     <rect x="64" y="72" width="72" height="6" rx="3"/>
     <rect x="64" y="96" width="52" height="5" rx="2.5" fill="#ffffff" fill-opacity="0.18"/>
     <rect x="64" y="116" width="60" height="5" rx="2.5" fill="#ffffff" fill-opacity="0.18"/>
@@ -32,7 +32,7 @@
       <text x="200" y="98" font-size="11" fill="#98a1b0" letter-spacing="2">CLIENTES</text>
       <text x="200" y="134" font-size="30" fill="#ffffff" letter-spacing="2">128</text>
       <text x="384" y="98" font-size="11" fill="#98a1b0" letter-spacing="2">INGRESOS</text>
-      <text x="384" y="134" font-size="30" fill="#ff4757" letter-spacing="2">$42K</text>
+      <text x="384" y="134" font-size="30" fill="#67e8f9" letter-spacing="2">$42K</text>
       <text x="568" y="98" font-size="11" fill="#98a1b0" letter-spacing="2">PAGOS PEND.</text>
       <text x="568" y="134" font-size="30" fill="#ffffff" letter-spacing="2">07</text>
     </g>
@@ -41,12 +41,12 @@
   <!-- Gráfica -->
   <g>
     <rect x="184" y="176" width="544" height="196" fill="#10141b" stroke="#ffffff" stroke-opacity="0.08"/>
-    <path d="M212 330 L272 300 L330 312 L390 262 L450 280 L512 226 L574 246 L636 196 L700 214" fill="none" stroke="#e11d2e" stroke-width="3"/>
-    <path d="M212 330 L272 300 L330 312 L390 262 L450 280 L512 226 L574 246 L636 196 L700 214 L700 350 L212 350Z" fill="#e11d2e" fill-opacity="0.1"/>
-    <g fill="#e11d2e"><circle cx="512" cy="226" r="4"/><circle cx="700" cy="214" r="4"/></g>
+    <path d="M212 330 L272 300 L330 312 L390 262 L450 280 L512 226 L574 246 L636 196 L700 214" fill="none" stroke="#22d3ee" stroke-width="3"/>
+    <path d="M212 330 L272 300 L330 312 L390 262 L450 280 L512 226 L574 246 L636 196 L700 214 L700 350 L212 350Z" fill="#22d3ee" fill-opacity="0.1"/>
+    <g fill="#22d3ee"><circle cx="512" cy="226" r="4"/><circle cx="700" cy="214" r="4"/></g>
   </g>
 
-  <g fill="none" stroke="#e11d2e" stroke-opacity="0.6" stroke-width="2.5">
+  <g fill="none" stroke="#22d3ee" stroke-opacity="0.6" stroke-width="2.5">
     <path d="M40 74V40h34"/><path d="M726 40h34v34"/><path d="M760 376v34h-34"/><path d="M74 410H40v-34"/>
   </g>
 </svg>

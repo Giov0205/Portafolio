@@ -7,8 +7,8 @@ import { experience, skillGroups } from "../data/portfolio";
   id="habilidades"
   index="03"
   title="HABILIDADES Y EXPERIENCIA"
-  eyebrow="SECCIÓN 03 — EQUIPAMIENTO Y CAMPAÑAS"
-  breadcrumb="TAC-COM // EXPEDIENTE 03"
+  eyebrow="MÓDULO 03 — STACK Y TRAYECTORIA"
+  breadcrumb="SISTEMA // MÓDULO 03"
 >
   <div class="grid gap-6 lg:grid-cols-2">
     {
@@ -24,28 +24,9 @@ import { experience, skillGroups } from "../data/portfolio";
             <span class="hud-label text-accent-soft">{group.codename}</span>
           </div>
 
-          <ul class="mt-4 space-y-4">
+          <ul class="mt-4 flex flex-wrap gap-2" aria-label={`Tecnologías de ${group.name}`}>
             {group.skills.map((skill) => (
-              <li>
-                <div class="mb-1.5 flex items-baseline justify-between gap-3">
-                  <span class="text-sm uppercase tracking-[0.1em] text-white/85">
-                    {skill.name}
-                  </span>
-                  <span class="font-mono text-[10px] tracking-[0.1em] text-white/45">
-                    {String(skill.level).padStart(2, "0")}
-                  </span>
-                </div>
-                <div
-                  class="skill-bar"
-                  role="progressbar"
-                  aria-label={`Nivel de ${skill.name}`}
-                  aria-valuenow={skill.level}
-                  aria-valuemin="0"
-                  aria-valuemax="100"
-                >
-                  <span class="skill-fill" style={`--level:${skill.level}`}></span>
-                </div>
-              </li>
+              <li class="chip">{skill}</li>
             ))}
           </ul>
         </section>
@@ -55,21 +36,21 @@ import { experience, skillGroups } from "../data/portfolio";
 
   <div class="mt-12 grid gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
     <div>
-      <p class="eyebrow">REGISTRO DE CAMPAÑAS</p>
+      <p class="eyebrow">TRAYECTORIA</p>
       <h3 class="section-title mt-2 text-4xl text-white sm:text-5xl">
         EXPERIENCIA
       </h3>
       <p class="mt-3 text-sm leading-relaxed text-ash">
-        Proyectos y etapas donde he puesto en práctica el equipamiento. Cada
-        entrada incluye lo que se construyó y la tecnología usada.
+        Proyectos y etapas donde he puesto en práctica estas tecnologías. Cada
+        entrada incluye lo que construí y con qué.
       </p>
       <div class="hud hud-corner-sm mt-5 p-4">
         <p class="hud-label flex items-center gap-2">
           <span class="status-dot" aria-hidden="true"></span>
-          ESTADO: EN ASCENSO
+          ESTADO: DISPONIBLE
         </p>
         <p class="mt-2 text-xs leading-relaxed text-ash">
-          Abierto a prácticas, proyectos freelance y posiciones junior/trainee.
+          Abierto a prácticas profesionales y proyectos.
         </p>
       </div>
     </div>

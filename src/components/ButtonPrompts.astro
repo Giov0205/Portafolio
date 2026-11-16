@@ -1,0 +1,61 @@
+---
+/**
+ * Barra de "guías de botones" abajo de la pantalla, como en el menú de una consola.
+ * Cada guía dice en qué vistas aparece (data-views). main.ts muestra solo las de la
+ * vista actual. Las que tienen data-action también se pueden presionar con el mouse.
+ */
+import PadIcon from "./PadIcon.astro";
+
+type Prompt = {
+  icon: "cross" | "circle" | "triangle" | "square" | "dpad";
+  label: string;
+  views: string;
+  action?: "circle" | "triangle" | "square";
+  key?: string;
+};
+
+const prompts: Prompt[] = [
+  { icon: "dpad", label: "NAVEGAR", views: "menu acerca proyectos habilidades contacto", key: "Flechas" },
+  { icon: "cross", label: "ABRIR", views: "menu", key: "Enter" },
+  { icon: "cross", label: "VOLTEAR CAJA", views: "proyectos", key: "Enter" },
+  { icon: "cross", label: "SELECCIONAR", views: "acerca habilidades contacto", key: "Enter" },
+  { icon: "triangle", label: "VER CÓDIGO", views: "proyectos", action: "triangle" },
+  { icon: "square", label: "COPIAR CORREO", views: "contacto", action: "square" },
+  { icon: "circle", label: "REGRESAR", views: "acerca proyectos habilidades contacto", action: "circle", key: "Esc" },
+];
+---
+
+<div class="pad-bar" data-pad-bar>
+  <div class="pad-bar-inner">
+    <span class="pad-status" data-pad-status>
+      <span class="status-dot" aria-hidden="true"></span>
+      <span data-pad-status-text>CONECTA UN CONTROL</span>
+    </span>
+    <ul class="pad-prompts" role="list" aria-label="Controles">
+      {
+        prompts.map((prompt) => (
+          <li data-prompt data-views={prompt.views} hidden={!prompt.views.split(" ").includes("menu")}>
+            {prompt.action ? (
+              <button
+                type="button"
+                class="pad-prompt pad-prompt-button"
+                data-pad-action={prompt.action}
+                title={prompt.key ? `Teclado: ${prompt.key}` : undefined}
+              >
+                <PadIcon type={prompt.icon} />
+                {prompt.label}
+              </button>
+            ) : (
+              <span class="pad-prompt" title={prompt.key ? `Teclado: ${prompt.key}` : undefined}>
+                <PadIcon type={prompt.icon} />
+                {prompt.label}
+              </span>
+            )}
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</div>
+
+<p class="pad-toast" data-toast role="status" aria-live="polite" hidden></p>

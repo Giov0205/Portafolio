@@ -9,8 +9,8 @@
       <stop offset="1" stop-color="#1b1f26"/>
     </linearGradient>
     <radialGradient id="glow" cx="0.5" cy="0.3" r="0.6">
-      <stop offset="0" stop-color="#e11d2e" stop-opacity="0.28"/>
-      <stop offset="1" stop-color="#e11d2e" stop-opacity="0"/>
+      <stop offset="0" stop-color="#22d3ee" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#22d3ee" stop-opacity="0"/>
     </radialGradient>
     <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
       <path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.05"/>
@@ -28,14 +28,14 @@
   </g>
 
   <!-- Retícula sobre el rostro -->
-  <g stroke="#e11d2e" stroke-opacity="0.3" fill="none">
+  <g stroke="#22d3ee" stroke-opacity="0.3" fill="none">
     <circle cx="300" cy="268" r="120" stroke-dasharray="4 10"/>
     <path d="M110 268h380M300 80v380"/>
   </g>
 
   <!-- Marco y esquinas -->
   <rect x="16" y="16" width="568" height="688" fill="none" stroke="#ffffff" stroke-opacity="0.12"/>
-  <g fill="none" stroke="#e11d2e" stroke-width="4">
+  <g fill="none" stroke="#22d3ee" stroke-width="4">
     <path d="M16 70V16h54"/>
     <path d="M530 16h54v54"/>
     <path d="M584 650v54h-54"/>

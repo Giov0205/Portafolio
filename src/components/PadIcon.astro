@@ -1,0 +1,35 @@
+---
+/**
+ * Símbolos de botones estilo control de consola, dibujados a mano
+ * (no son íconos oficiales de ninguna marca).
+ */
+interface Props {
+  type: "cross" | "circle" | "triangle" | "square" | "dpad";
+  class?: string;
+}
+
+const { type, class: className } = Astro.props;
+---
+
+<span class:list={["pad-icon", `pad-${type}`, className]} aria-hidden="true">
+  <svg viewBox="0 0 24 24" width="100%" height="100%">
+    {type === "cross" && (
+      <path d="M8 8 16 16M16 8 8 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" />
+    )}
+    {type === "circle" && (
+      <circle cx="12" cy="12" r="4.6" fill="none" stroke="currentColor" stroke-width="2.2" />
+    )}
+    {type === "triangle" && (
+      <path d="M12 7.2 17 16H7Z" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linejoin="round" />
+    )}
+    {type === "square" && (
+      <rect x="7.6" y="7.6" width="8.8" height="8.8" fill="none" stroke="currentColor" stroke-width="2.1" />
+    )}
+    {type === "dpad" && (
+      <path
+        d="M10 5h4v5h5v4h-5v5h-4v-5H5v-4h5Z"
+        fill="currentColor"
+      />
+    )}
+  </svg>
+</span>

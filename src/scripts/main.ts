@@ -1,7 +1,11 @@
 /**
- * Interacción del menú táctico.
- * Mantener este archivo pequeño: solo navegación, teclado y foco.
+ * Interacción del menú HUD.
+ * Navegación con mouse, teclado y control de consola (ver gamepad.ts),
+ * guías de botones y cajas de proyectos que se voltean.
  */
+import "./gamepad";
+import type { PadButton } from "./gamepad";
+import { site } from "../data/portfolio";
 
 const app = document.querySelector<HTMLElement>("[data-app]");
 
@@ -14,6 +18,12 @@ if (app) {
   const views = Array.from(app.querySelectorAll<HTMLElement>("[data-view-panel]"));
   const backButtons = Array.from(app.querySelectorAll<HTMLButtonElement>("[data-back]"));
   const announcer = app.querySelector<HTMLElement>("[data-announcer]");
+  const prompts = Array.from(document.querySelectorAll<HTMLElement>("[data-prompt]"));
+  const padStatusText = document.querySelector<HTMLElement>("[data-pad-status-text]");
+  const toast = document.querySelector<HTMLElement>("[data-toast]");
+  const gameBoxes = Array.from(app.querySelectorAll<HTMLElement>("[data-game-box]"));
+  let activeBox: HTMLElement | null = null;
+  let toastTimer = 0;
 
   const baseTitle = document.title;
 
@@ -30,6 +40,82 @@ if (app) {
       announcer.textContent = message;
     }, 80);
   }
+
+  function showToast(message: string) {
+    if (!toast) return;
+    toast.textContent = message;
+    toast.hidden = false;
+    window.clearTimeout(toastTimer);
+    toastTimer = window.setTimeout(() => {
+      toast.hidden = true;
+    }, 2400);
+  }
+
+  /** Muestra solo las guías de botones de la vista actual. */
+  function updatePrompts(view: string) {
+    prompts.forEach((prompt) => {
+      const views = (prompt.dataset.views ?? "").split(" ");
+      prompt.hidden = !views.includes(view);
+    });
+  }
+
+  // --- Cajas de proyectos: voltear portada / contraportada ---
+  function flipBox(box: HTMLElement, open: boolean, moveFocus = true) {
+    const front = box.querySelector<HTMLElement>(".game-front");
+    const back = box.querySelector<HTMLElement>(".game-back");
+    if (!front || !back) return;
+
+    box.dataset.flipped = String(open);
+    front.setAttribute("aria-expanded", String(open));
+    front.inert = open;
+    back.inert = !open;
+    activeBox = box;
+
+    if (!moveFocus) return;
+    if (open) {
+      back.querySelector<HTMLElement>("[data-back-focus]")?.focus({ preventScroll: true });
+    } else {
+      front.focus({ preventScroll: true });
+    }
+  }
+
+  function openRepo(box: HTMLElement | null) {
+    if (!box) {
+      showToast("Primero selecciona una caja.");
+      return;
+    }
+    const repo = box.dataset.repo ?? "";
+    if (!repo) {
+      showToast(`${box.dataset.name} no tiene código público.`);
+      return;
+    }
+    const opened = window.open(repo, "_blank", "noopener,noreferrer");
+    if (!opened) showToast("Tu navegador bloqueó la pestaña. Usa el botón CÓDIGO.");
+  }
+
+  async function copyEmail() {
+    try {
+      await navigator.clipboard.writeText(site.email);
+      showToast(`Correo copiado: ${site.email}`);
+    } catch {
+      showToast(`Mi correo: ${site.email}`);
+    }
+  }
+
+  gameBoxes.forEach((box) => {
+    box.querySelector('[data-flip="open"]')?.addEventListener("click", () => flipBox(box, true));
+    box.querySelector('[data-flip="close"]')?.addEventListener("click", () => flipBox(box, false));
+    box.addEventListener("focusin", () => {
+      activeBox = box;
+    });
+    box.addEventListener("mouseenter", () => {
+      activeBox = box;
+    });
+  });
+
+  document.querySelectorAll<HTMLElement>("[data-copy-email]").forEach((button) => {
+    button.addEventListener("click", () => void copyEmail());
+  });
 
   function select(index: number, moveFocus = false) {
     const total = items.length;
@@ -65,6 +151,7 @@ if (app) {
       element.hidden = element !== view;
     });
     app!.dataset.view = id;
+    updatePrompts(id);
 
     view.classList.remove("view-in");
     void view.offsetWidth;
@@ -94,6 +181,8 @@ if (app) {
     });
     if (menuScreen) menuScreen.hidden = false;
     app!.dataset.view = "menu";
+    gameBoxes.forEach((box) => flipBox(box, false, false));
+    updatePrompts("menu");
 
     if (options.push !== false) {
       history.pushState({}, "", location.pathname + location.search);
@@ -168,7 +257,7 @@ if (app) {
     if (event.defaultPrevented) return;
 
     if (currentView) {
-      if (event.key === "Escape") closeSection();
+      if (event.key === "Escape") handleAction("circle");
       return;
     }
 
@@ -221,8 +310,96 @@ if (app) {
     }
   });
 
+  // --- Acciones de los botones △ ○ □ (control, teclado o clic en la barra) ---
+  function handleAction(action: "circle" | "triangle" | "square") {
+    if (action === "square") {
+      void copyEmail();
+      return;
+    }
+    if (!currentView) return;
+
+    if (action === "triangle") {
+      if (currentView === "proyectos") openRepo(activeBox);
+      return;
+    }
+
+    // ○: primero voltea la caja abierta; si no hay, regresa al menú.
+    const flipped = gameBoxes.find((box) => box.dataset.flipped === "true");
+    if (flipped) flipBox(flipped, false);
+    else closeSection();
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-pad-action]").forEach((button) => {
+    button.addEventListener("click", () => {
+      handleAction(button.dataset.padAction as "circle" | "triangle" | "square");
+    });
+  });
+
+  // --- Control de consola ---
+  function focusables(container: HTMLElement) {
+    return Array.from(
+      container.querySelectorAll<HTMLElement>("a[href], button:not([disabled])"),
+    ).filter((element) => !element.closest("[inert]") && element.offsetParent !== null);
+  }
+
+  function moveFocus(step: number) {
+    const view = views.find((element) => element.dataset.viewPanel === currentView);
+    if (!view) return;
+    const list = focusables(view);
+    if (!list.length) return;
+    const current = list.indexOf(document.activeElement as HTMLElement);
+    const next = current === -1 ? 0 : Math.min(list.length - 1, Math.max(0, current + step));
+    list[next].focus({ preventScroll: true });
+    list[next].scrollIntoView({ block: "nearest", behavior: "smooth" });
+  }
+
+  document.addEventListener("pad", (event) => {
+    const button = (event as CustomEvent<PadButton>).detail;
+
+    if (!currentView) {
+      if (button === "up" || button === "left") select(selected - 1, true);
+      else if (button === "down" || button === "right") select(selected + 1, true);
+      else if (button === "cross") {
+        const id = items[selected]?.dataset.section;
+        if (id) openSection(id);
+      } else if (button === "square") handleAction("square");
+      return;
+    }
+
+    switch (button) {
+      case "up":
+      case "left":
+        moveFocus(-1);
+        break;
+      case "down":
+      case "right":
+        moveFocus(1);
+        break;
+      case "cross": {
+        const active = document.activeElement as HTMLElement | null;
+        const view = views.find((element) => element.dataset.viewPanel === currentView);
+        if (active && view?.contains(active) && active.matches("a[href], button")) active.click();
+        else moveFocus(1);
+        break;
+      }
+      default:
+        handleAction(button);
+    }
+  });
+
+  document.addEventListener("pad-connection", (event) => {
+    const connected = (event as CustomEvent<boolean>).detail;
+    if (padStatusText) padStatusText.textContent = connected ? "CONTROL CONECTADO" : "CONECTA UN CONTROL";
+    showToast(connected ? "Control conectado. Usa la cruceta y ✕." : "Control desconectado.");
+  });
+
+  if (document.documentElement.dataset.gamepad === "on" && padStatusText) {
+    padStatusText.textContent = "CONTROL CONECTADO";
+  }
+
   // --- Estado inicial: respeta un enlace directo con #seccion ---
   select(selected);
+  updatePrompts("menu");
   const initial = sectionFromHash();
   if (initial) openSection(initial, { push: false, focus: false });
 }
