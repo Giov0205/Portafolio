@@ -1,0 +1,54 @@
+---
+import { menuSections, ui } from "../data/portfolio";
+
+interface Props {
+  activeIndex?: number;
+}
+const { activeIndex = 0 } = Astro.props;
+---
+
+<nav aria-label="Menú principal" class="w-full">
+  <div class="mb-3 flex items-center justify-between gap-3">
+    <p class="hud-label hud-label-accent">SELECCIÓN DE OPERACIÓN</p>
+    <p class="hud-label hidden text-white/40 sm:block">04 MÓDULOS</p>
+  </div>
+
+  <ul class="flex flex-col gap-1.5" role="list" data-menu-list>
+    {
+      menuSections.map((section, i) => (
+        <li>
+          <button
+            type="button"
+            class="menu-item group"
+            data-menu-item
+            data-section={section.id}
+            data-label={section.label}
+            aria-current={i === activeIndex ? "true" : "false"}
+            tabindex={i === activeIndex ? 0 : -1}
+            aria-controls={`panel-${section.id}`}
+          >
+            <span class="menu-arrow font-mono text-sm leading-none" aria-hidden="true">
+              &gt;
+            </span>
+            <span class="menu-index font-mono text-[10px] tracking-[0.2em] text-white/35">
+              {section.index}
+            </span>
+            <span class="flex-1 text-[0.95rem] font-semibold uppercase leading-tight tracking-[0.16em] sm:text-lg sm:tracking-[0.2em]">
+              {section.label}
+            </span>
+            <span
+              class="menu-enter hidden font-mono text-[9px] tracking-[0.24em] text-accent-soft sm:inline"
+              aria-hidden="true"
+            >
+              ACCEDER
+            </span>
+          </button>
+        </li>
+      ))
+    }
+  </ul>
+
+  <p class="mt-4 hud-label text-center text-white/35 sm:text-left" aria-hidden="true">
+    {ui.menuHint}
+  </p>
+</nav>

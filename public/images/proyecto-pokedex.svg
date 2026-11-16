@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#131722"/><stop offset="1" stop-color="#07090d"/>
+    </linearGradient>
+    <linearGradient id="ball" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ff4757"/><stop offset="1" stop-color="#8c1420"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect width="800" height="450" fill="url(#grid)"/>
+
+  <!-- Teléfono -->
+  <g transform="translate(250 60)">
+    <rect width="300" height="360" rx="26" fill="#0b0e14" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2"/>
+    <rect x="14" y="24" width="272" height="312" rx="10" fill="#10141c"/>
+    <rect x="120" y="10" width="60" height="7" rx="3.5" fill="#232a36"/>
+    <text x="32" y="62" font-family="Consolas, monospace" font-size="14" fill="#ff4757" letter-spacing="3">POKÉDEX</text>
+    <g>
+      <rect x="32" y="82" width="112" height="96" rx="6" fill="#161b24" stroke="#ffffff" stroke-opacity="0.08"/>
+      <rect x="156" y="82" width="112" height="96" rx="6" fill="#161b24" stroke="#ffffff" stroke-opacity="0.08"/>
+      <rect x="32" y="190" width="112" height="96" rx="6" fill="#161b24" stroke="#ffffff" stroke-opacity="0.08"/>
+      <rect x="156" y="190" width="112" height="96" rx="6" fill="#161b24" stroke="#ffffff" stroke-opacity="0.08"/>
+    </g>
+    <g fill="none" stroke="#e11d2e" stroke-opacity="0.7" stroke-width="2">
+      <circle cx="88" cy="126" r="26"/>
+      <circle cx="212" cy="126" r="26"/>
+      <circle cx="88" cy="234" r="26"/>
+      <circle cx="212" cy="234" r="26"/>
+      <path d="M62 126h52M186 126h52M62 234h52M186 234h52"/>
+    </g>
+  </g>
+
+  <!-- Pokébola decorativa -->
+  <g transform="translate(640 140)">
+    <circle r="62" fill="url(#ball)" stroke="#ffffff" stroke-opacity="0.25" stroke-width="3"/>
+    <path d="M-62 0h124" stroke="#0b0e14" stroke-width="12"/>
+    <circle r="20" fill="#0b0e14" stroke="#ffffff" stroke-opacity="0.4" stroke-width="4"/>
+    <circle r="8" fill="#ff4757"/>
+  </g>
+  <text x="640" y="250" font-family="Consolas, monospace" font-size="12" fill="#98a1b0" letter-spacing="3" text-anchor="middle">REACT NATIVE</text>
+  <text x="640" y="272" font-family="Consolas, monospace" font-size="12" fill="#98a1b0" letter-spacing="3" text-anchor="middle">EXPO + TS</text>
+
+  <g fill="none" stroke="#e11d2e" stroke-opacity="0.6" stroke-width="2.5">
+    <path d="M40 74V40h34"/><path d="M726 40h34v34"/><path d="M760 376v34h-34"/><path d="M74 410H40v-34"/>
+  </g>
+</svg>

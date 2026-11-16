@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111722"/><stop offset="1" stop-color="#06080c"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect width="800" height="450" fill="url(#grid)"/>
+
+  <!-- Nodos conectados -->
+  <g stroke="#e11d2e" stroke-opacity="0.55" stroke-width="2" fill="none">
+    <path d="M400 225 L220 120M400 225 L580 120M400 225 L220 330M400 225 L580 330"/>
+  </g>
+
+  <g>
+    <rect x="330" y="185" width="140" height="80" fill="#10141b" stroke="#ff4757" stroke-width="2"/>
+    <text x="400" y="222" font-family="Consolas, monospace" font-size="14" fill="#ff4757" text-anchor="middle" letter-spacing="3">API</text>
+    <text x="400" y="244" font-family="Consolas, monospace" font-size="10" fill="#98a1b0" text-anchor="middle" letter-spacing="2">NESTJS</text>
+  </g>
+
+  <g fill="#10141b" stroke="#ffffff" stroke-opacity="0.18" stroke-width="1.5">
+    <rect x="150" y="82" width="140" height="66"/>
+    <rect x="510" y="82" width="140" height="66"/>
+    <rect x="150" y="302" width="140" height="66"/>
+    <rect x="510" y="302" width="140" height="66"/>
+  </g>
+  <g font-family="Consolas, monospace" font-size="11" fill="#98a1b0" letter-spacing="2">
+    <text x="220" y="112" text-anchor="middle">AUTH</text>
+    <text x="220" y="132" text-anchor="middle" fill="#ffffff" fill-opacity="0.4">JWT</text>
+    <text x="580" y="112" text-anchor="middle">CLIENTES</text>
+    <text x="580" y="132" text-anchor="middle" fill="#ffffff" fill-opacity="0.4">CRUD</text>
+    <text x="220" y="332" text-anchor="middle">PAGOS</text>
+    <text x="220" y="352" text-anchor="middle" fill="#ffffff" fill-opacity="0.4">PRISMA</text>
+    <text x="580" y="332" text-anchor="middle">REPORTES</text>
+    <text x="580" y="352" text-anchor="middle" fill="#ffffff" fill-opacity="0.4">SQL</text>
+  </g>
+
+  <!-- Paquetes viajando -->
+  <g fill="#ff4757">
+    <circle cx="310" cy="172" r="4"/>
+    <circle cx="490" cy="172" r="4"/>
+    <circle cx="310" cy="278" r="4"/>
+    <circle cx="490" cy="278" r="4"/>
+  </g>
+
+  <g fill="none" stroke="#e11d2e" stroke-opacity="0.6" stroke-width="2.5">
+    <path d="M40 74V40h34"/><path d="M726 40h34v34"/><path d="M760 376v34h-34"/><path d="M74 410H40v-34"/>
+  </g>
+  <text x="758" y="54" font-family="Consolas, monospace" font-size="12" fill="#98a1b0" letter-spacing="4" text-anchor="end">REST · PRISMA</text>
+</svg>

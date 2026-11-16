@@ -1,0 +1,101 @@
+---
+import SectionShell from "./SectionShell.astro";
+import { experience, skillGroups } from "../data/portfolio";
+---
+
+<SectionShell
+  id="habilidades"
+  index="03"
+  title="HABILIDADES Y EXPERIENCIA"
+  eyebrow="SECCIÓN 03 — EQUIPAMIENTO Y CAMPAÑAS"
+  breadcrumb="TAC-COM // EXPEDIENTE 03"
+>
+  <div class="grid gap-6 lg:grid-cols-2">
+    {
+      skillGroups.map((group) => (
+        <section class="hud p-5 sm:p-6" aria-labelledby={`skill-${group.name}`}>
+          <div class="flex items-center justify-between gap-3 border-b border-dashed border-white/12 pb-3">
+            <h3
+              id={`skill-${group.name}`}
+              class="font-title text-2xl uppercase leading-none tracking-wide text-white"
+            >
+              {group.name}
+            </h3>
+            <span class="hud-label text-accent-soft">{group.codename}</span>
+          </div>
+
+          <ul class="mt-4 space-y-4">
+            {group.skills.map((skill) => (
+              <li>
+                <div class="mb-1.5 flex items-baseline justify-between gap-3">
+                  <span class="text-sm uppercase tracking-[0.1em] text-white/85">
+                    {skill.name}
+                  </span>
+                  <span class="font-mono text-[10px] tracking-[0.1em] text-white/45">
+                    {String(skill.level).padStart(2, "0")}
+                  </span>
+                </div>
+                <div
+                  class="skill-bar"
+                  role="progressbar"
+                  aria-label={`Nivel de ${skill.name}`}
+                  aria-valuenow={skill.level}
+                  aria-valuemin="0"
+                  aria-valuemax="100"
+                >
+                  <span class="skill-fill" style={`--level:${skill.level}`}></span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))
+    }
+  </div>
+
+  <div class="mt-12 grid gap-8 lg:grid-cols-[280px_1fr] lg:gap-12">
+    <div>
+      <p class="eyebrow">REGISTRO DE CAMPAÑAS</p>
+      <h3 class="section-title mt-2 text-4xl text-white sm:text-5xl">
+        EXPERIENCIA
+      </h3>
+      <p class="mt-3 text-sm leading-relaxed text-ash">
+        Proyectos y etapas donde he puesto en práctica el equipamiento. Cada
+        entrada incluye lo que se construyó y la tecnología usada.
+      </p>
+      <div class="hud hud-corner-sm mt-5 p-4">
+        <p class="hud-label flex items-center gap-2">
+          <span class="status-dot" aria-hidden="true"></span>
+          ESTADO: EN ASCENSO
+        </p>
+        <p class="mt-2 text-xs leading-relaxed text-ash">
+          Abierto a prácticas, proyectos freelance y posiciones junior/trainee.
+        </p>
+      </div>
+    </div>
+
+    <div class="timeline">
+      {
+        experience.map((entry) => (
+          <div class="timeline-item">
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <span class="font-mono text-[10px] tracking-[0.22em] text-accent-soft">
+                {entry.period}
+              </span>
+              <span class="chip">{entry.tag}</span>
+            </div>
+            <h4 class="mt-3 text-lg font-semibold uppercase tracking-[0.08em] text-white">
+              {entry.title}
+            </h4>
+            <p class="mt-0.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/45">
+              {entry.place}
+            </p>
+            <p class="mt-2 max-w-2xl text-sm leading-relaxed text-ash">
+              {entry.description}
+            </p>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</SectionShell>

@@ -1,0 +1,650 @@
+@import "tailwindcss";
+
+/* ============================================================
+   TEMA — colores y tipografías del sistema
+   Cambia estos valores si quieres otra paleta.
+   ============================================================ */
+@theme {
+  --color-void: #06070a;
+  --color-carbon: #0b0d12;
+  --color-panel: #0e1117;
+  --color-line: #232833;
+  --color-blood: #5c0d17;
+  --color-accent: #e11d2e;
+  --color-accent-soft: #ff4757;
+  --color-ash: #98a1b0;
+  --color-silver: #d7dde6;
+
+  --font-display: "Rajdhani", "Arial Narrow", system-ui, sans-serif;
+  --font-title: "Teko", "Rajdhani", "Arial Narrow", sans-serif;
+  --font-mono: "JetBrains Mono", "Consolas", ui-monospace, monospace;
+
+  --animate-blink: blink 1.4s steps(1, end) infinite;
+}
+
+@keyframes blink {
+  0%,
+  68% {
+    opacity: 1;
+  }
+  69%,
+  100% {
+    opacity: 0.28;
+  }
+}
+
+@keyframes preview-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes view-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bar-grow {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes ghost-drift {
+  from {
+    transform: scale(1.04) translate3d(-1%, -1%, 0);
+  }
+  to {
+    transform: scale(1.12) translate3d(1%, 1%, 0);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  100% {
+    opacity: 0.62;
+  }
+  48% {
+    opacity: 0.62;
+  }
+  50% {
+    opacity: 0.35;
+  }
+  52% {
+    opacity: 0.6;
+  }
+}
+
+/* ============================================================
+   BASE
+   ============================================================ */
+@layer base {
+  :root {
+    color-scheme: dark;
+    --hud-corner: 12px;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-void);
+    color: #e8ecf2;
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-soft);
+    outline-offset: 3px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-wrap: balance;
+  }
+
+  img {
+    max-width: 100%;
+    display: block;
+  }
+
+  /* Necesario porque las utilidades de Tailwind (flex, grid…) pueden
+     sobrescribir el atributo hidden del navegador. */
+  [hidden] {
+    display: none !important;
+  }
+}
+
+/* ============================================================
+   FONDO TÁCTICO (foto + capas)
+   ============================================================ */
+.fx {
+  position: fixed;
+  inset: 0;
+  z-index: -10;
+  overflow: hidden;
+  background: var(--color-void);
+  pointer-events: none;
+}
+
+.fx-photo {
+  position: absolute;
+  inset: -6%;
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px) saturate(0.7) brightness(0.82) contrast(1.04);
+  opacity: 0.62;
+  transform: scale(1.06);
+  animation: ghost-drift 34s ease-in-out infinite alternate;
+}
+
+.fx-tint {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(120% 90% at 12% 0%, rgba(225, 29, 46, 0.18), transparent 55%),
+    radial-gradient(90% 80% at 90% 100%, rgba(92, 13, 23, 0.28), transparent 60%),
+    linear-gradient(180deg, rgba(6, 7, 10, 0.2), rgba(6, 7, 10, 0.76));
+}
+
+.fx-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 84px 84px;
+  mask-image: radial-gradient(85% 70% at 50% 45%, #000 20%, transparent 100%);
+  opacity: 0.6;
+}
+
+.fx-noise {
+  position: absolute;
+  inset: 0;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.fx-scanlines {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.32) 0px,
+    rgba(0, 0, 0, 0.32) 1px,
+    transparent 1px,
+    transparent 4px
+  );
+  opacity: 0.62;
+  animation: flicker 9s linear infinite;
+}
+
+.fx-vignette {
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 180px 40px rgba(0, 0, 0, 0.9);
+}
+
+/* ============================================================
+   PANELES HUD
+   ============================================================ */
+.hud {
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  background:
+    linear-gradient(158deg, rgba(20, 23, 30, 0.92), rgba(9, 11, 15, 0.9));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 30px 70px -40px #000;
+  backdrop-filter: blur(3px);
+}
+
+/* Esquinas marcadas con "brackets" en las 4 puntas */
+.hud::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  pointer-events: none;
+  --c: color-mix(in srgb, var(--color-accent) 75%, transparent);
+  --s: var(--hud-corner);
+  background-image:
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c)),
+    linear-gradient(var(--c), var(--c)), linear-gradient(var(--c), var(--c));
+  background-repeat: no-repeat;
+  background-size:
+    var(--s) 2px, 2px var(--s),
+    var(--s) 2px, 2px var(--s),
+    var(--s) 2px, 2px var(--s),
+    var(--s) 2px, 2px var(--s);
+  background-position:
+    left top, left top,
+    right top, right top,
+    left bottom, left bottom,
+    right bottom, right bottom;
+}
+
+.hud-corner-sm {
+  --hud-corner: 8px;
+}
+
+.hud-label {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  line-height: 1;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-ash);
+}
+
+.hud-label-accent {
+  color: color-mix(in srgb, var(--color-accent-soft) 85%, #fff);
+}
+
+.hud-divider {
+  border-top: 1px dashed rgba(255, 255, 255, 0.14);
+}
+
+/* Puntito "en línea" */
+.status-dot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background: var(--color-accent-soft);
+  box-shadow: 0 0 8px 1px rgba(225, 29, 46, 0.8);
+  animation: blink 1.6s steps(1, end) infinite;
+}
+
+.status-dot-green {
+  background: #4ade80;
+  box-shadow: 0 0 8px 1px rgba(74, 222, 128, 0.7);
+}
+
+/* ============================================================
+   TIPOGRAFÍA / DETALLES
+   ============================================================ */
+.name-gradient {
+  background-image: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #e6ebf2 32%,
+    #a7b1bf 62%,
+    #6c7685 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.role-line {
+  background: linear-gradient(90deg, var(--color-accent) 0%, rgba(225, 29, 46, 0.15) 70%, transparent 100%);
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-ash);
+}
+
+/* ============================================================
+   MENÚ PRINCIPAL
+   ============================================================ */
+.menu-item {
+  position: relative;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem 0.85rem 1.15rem;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--color-ash);
+  text-align: left;
+  transition:
+    background-color 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+.menu-item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--color-accent);
+  box-shadow: 0 0 10px rgba(225, 29, 46, 0.7);
+  transform: scaleY(0);
+  transform-origin: center;
+  transition: transform 220ms ease;
+}
+
+.menu-arrow {
+  color: var(--color-accent-soft);
+  opacity: 0;
+  transform: translateX(-6px);
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+}
+
+.menu-item:hover {
+  color: #cfd6e1;
+}
+
+.menu-item[aria-current="true"] {
+  color: #fff;
+  border-color: rgba(225, 29, 46, 0.32);
+  background:
+    linear-gradient(90deg, rgba(225, 29, 46, 0.18), rgba(225, 29, 46, 0.03) 62%, transparent 100%);
+}
+
+.menu-item[aria-current="true"]::before {
+  transform: scaleY(1);
+}
+
+.menu-item[aria-current="true"] .menu-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.menu-item[aria-current="true"] .menu-index {
+  color: var(--color-accent-soft);
+}
+
+.menu-item .menu-enter {
+  opacity: 0;
+  transform: translateX(4px);
+  transition:
+    opacity 200ms ease,
+    transform 200ms ease;
+}
+
+.menu-item[aria-current="true"] .menu-enter {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Vista previa: animación al cambiar de opción */
+.preview-panel[hidden] {
+  display: none;
+}
+
+.preview-panel {
+  animation: preview-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ============================================================
+   BOTONES
+   ============================================================ */
+.btn-hud {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 0.6rem 1rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #dfe5ee;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.btn-hud:hover {
+  border-color: rgba(225, 29, 46, 0.65);
+  background: rgba(225, 29, 46, 0.14);
+  color: #fff;
+}
+
+.btn-hud:active {
+  transform: translateY(1px);
+}
+
+.btn-accent {
+  border-color: rgba(225, 29, 46, 0.55);
+  background: rgba(225, 29, 46, 0.12);
+  color: #fff;
+}
+
+.btn-accent:hover {
+  background: rgba(225, 29, 46, 0.24);
+}
+
+/* ============================================================
+   SECCIONES INTERNAS
+   ============================================================ */
+.view-in {
+  animation: view-in 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.section-title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  line-height: 0.9;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.note-line {
+  border-left: 2px solid rgba(225, 29, 46, 0.6);
+  padding-left: 0.9rem;
+}
+
+/* Tarjetas de proyecto */
+.mission-card {
+  transition:
+    border-color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.mission-card:hover {
+  border-color: rgba(225, 29, 46, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 26px 50px -30px rgba(225, 29, 46, 0.35);
+}
+
+.mission-media img {
+  filter: saturate(0.7) contrast(1.05);
+  transition:
+    filter 400ms ease,
+    transform 500ms ease;
+}
+
+.mission-card:hover .mission-media img {
+  filter: saturate(1) contrast(1.05);
+  transform: scale(1.04);
+}
+
+/* Etiquetas de tecnología */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.15rem 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #b7c0cd;
+}
+
+/* Barras de habilidad */
+.skill-bar {
+  position: relative;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.055);
+  overflow: hidden;
+}
+
+.skill-fill {
+  display: block;
+  height: 100%;
+  width: calc(var(--level, 0) * 1%);
+  background: linear-gradient(90deg, #6b0f1a, var(--color-accent) 68%, var(--color-accent-soft));
+  box-shadow: 0 0 12px rgba(225, 29, 46, 0.5);
+  transform-origin: left center;
+  animation: bar-grow 900ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.skill-bar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0 9px,
+    rgba(6, 7, 10, 0.65) 9px 10px
+  );
+  pointer-events: none;
+}
+
+/* Línea de tiempo */
+.timeline {
+  position: relative;
+  padding-left: 1.6rem;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background: linear-gradient(
+    to bottom,
+    rgba(225, 29, 46, 0.8),
+    rgba(225, 29, 46, 0.2) 70%,
+    transparent
+  );
+}
+
+.timeline-item {
+  position: relative;
+  padding-bottom: 1.75rem;
+}
+
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: calc(-1.6rem + 1px);
+  top: 6px;
+  width: 7px;
+  height: 7px;
+  background: var(--color-void);
+  border: 1px solid var(--color-accent);
+  box-shadow: 0 0 8px rgba(225, 29, 46, 0.6);
+  transform: rotate(45deg);
+}
+
+/* Redes */
+.social-row {
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.social-row:hover {
+  border-color: rgba(225, 29, 46, 0.5);
+  background: rgba(225, 29, 46, 0.08);
+  transform: translateX(3px);
+}
+
+/* ============================================================
+   ACCESIBILIDAD / MOVIMIENTO REDUCIDO
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fx-photo {
+    transform: none;
+  }
+
+  .fx-scanlines {
+    opacity: 0.35;
+  }
+
+  .mission-card:hover {
+    transform: none;
+  }
+}
+
+/* ============================================================
+   UTILIDADES
+   ============================================================ */
+@utility text-glow {
+  text-shadow: 0 0 22px rgba(225, 29, 46, 0.35);
+}
+
+@utility bg-hud-grid {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#151821"/><stop offset="1" stop-color="#06080c"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#ffffff" stroke-opacity="0.05"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <rect width="800" height="450" fill="url(#grid)"/>
+
+  <!-- Bracket -->
+  <g stroke="#ffffff" stroke-opacity="0.3" stroke-width="2" fill="none">
+    <path d="M120 120h70v70h70M260 120h70v70h70M190 190v60h60v60h60M320 190v60h60v60h60"/>
+  </g>
+  <g>
+    <rect x="70" y="100" width="100" height="40" fill="#10141b" stroke="#ffffff" stroke-opacity="0.15"/>
+    <rect x="70" y="180" width="100" height="40" fill="#10141b" stroke="#ffffff" stroke-opacity="0.15"/>
+    <rect x="330" y="100" width="100" height="40" fill="#10141b" stroke="#ffffff" stroke-opacity="0.15"/>
+    <rect x="330" y="180" width="100" height="40" fill="#10141b" stroke="#ffffff" stroke-opacity="0.15"/>
+    <rect x="230" y="300" width="120" height="48" fill="#1a0d12" stroke="#ff4757" stroke-width="2"/>
+  </g>
+  <g font-family="Consolas, monospace" font-size="10" fill="#98a1b0" letter-spacing="1.5">
+    <text x="82" y="124">TEAM 01</text><text x="82" y="204">TEAM 03</text>
+    <text x="342" y="124">TEAM 02</text><text x="342" y="204">TEAM 04</text>
+  </g>
+  <text x="290" y="330" font-family="Consolas, monospace" font-size="12" fill="#ff4757" letter-spacing="3">FINAL</text>
+
+  <!-- Trofeo -->
+  <g transform="translate(640 250)">
+    <path d="M-38 -60h76v34a38 38 0 0 1-76 0Z" fill="#e11d2e" fill-opacity="0.85"/>
+    <path d="M-38 -52h-22a22 22 0 0 0 22 34M38 -52h22a22 22 0 0 1-22 34" fill="none" stroke="#ff4757" stroke-width="5"/>
+    <path d="M-10 12h20v34h-20zM-30 46h60v10h-60z" fill="#ff4757"/>
+    <path d="M0 -24l8 14 16 2-12 12 3 16-15-8-15 8 3-16-12-12 16-2z" fill="#0b0e14"/>
+  </g>
+
+  <g fill="none" stroke="#e11d2e" stroke-opacity="0.6" stroke-width="2.5">
+    <path d="M40 74V40h34"/><path d="M726 40h34v34"/><path d="M760 376v34h-34"/><path d="M74 410H40v-34"/>
+  </g>
+  <text x="758" y="54" font-family="Consolas, monospace" font-size="12" fill="#98a1b0" letter-spacing="4" text-anchor="end">HTML · CSS · JS</text>
+</svg>
