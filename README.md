@@ -1,12 +1,13 @@
-# Portafolio Táctico — Astro + Tailwind CSS
+# Portafolio HUD — Astro + Tailwind CSS
 
-Portafolio personal con estética de **menú principal de videojuego táctico**:
-fondo oscuro, acento rojo, paneles HUD con esquinas marcadas, scanlines y
-navegación por teclado como en un menú de shooter.
+Portafolio personal con estética de **menú de consola / HUD futurista**: fondo
+oscuro azulado, acento cian, paneles con esquinas marcadas, scanlines, una
+tienda de proyectos con cajas que se voltean y navegación con teclado, mouse o
+control de consola.
 
-- **Framework:** Astro 7 (salida 100% estática)
+- **Framework:** Astro 7 (salida 100 % estática)
 - **Estilos:** Tailwind CSS 4
-- **JavaScript:** solo un archivo pequeño (~4 KB) para el menú. Sin React ni frameworks de cliente.
+- **JavaScript:** dos archivos pequeños (`main.ts` y `gamepad.ts`, ~7 KB en total). Sin React ni frameworks de cliente.
 - **Contenido:** todo vive en `src/data/portfolio.ts`.
 - **Idioma:** español.
 
@@ -68,25 +69,42 @@ Ahí están:
 | Nombre, rol, ciudad, correo | `site` |
 | Opciones del menú y panel de vista previa | `menuSections` |
 | Foto, descripción, escuela, objetivos | `about` |
-| Proyectos (nombre, descripción, tecnologías, enlaces) | `projects` |
-| Habilidades y niveles (0 a 100) | `skillGroups` |
+| Proyectos (textos, tecnologías, caja y enlaces) | `projects` |
+| Tecnologías por área | `skillGroups` |
 | Experiencia / línea de tiempo | `experience` |
 | Redes sociales y correo | `socials` |
 | Textos de la interfaz | `ui` |
 
-Los comentarios `// ← CAMBIA ESTO` te marcan los datos de ejemplo.
+### Los proyectos son cajas de juego
+
+Cada proyecto del arreglo `projects` se dibuja como una caja con portada y
+contraportada. Además de los textos, cada uno tiene datos de la caja:
+
+```ts
+{
+  id: "mi-proyecto",
+  name: "MI PROYECTO",
+  genre: "WEB · FULL STACK",   // etiqueta superior
+  players: "1 JUGADOR",        // texto inferior izquierdo
+  year: "2026",                // año en la franja
+  status: "TERMINADO",         // etiqueta de estado
+  color: "#22d3ee",            // color de la franja y acentos de esa caja
+  image: "/images/mi-proyecto.jpg",
+  repo: "",
+  demo: "",
+  // …
+}
+```
 
 ### Poner tus enlaces de proyectos
-
-En cada proyecto hay dos campos:
 
 ```ts
 repo: "", // enlace de GitHub
 demo: "", // enlace de la demo en vivo
 ```
 
-Si los dejas vacíos, el botón aparece desactivado. Si pegas una URL completa
-(`https://...`), el botón se activa automáticamente.
+Si dejas un campo vacío, **ese botón no aparece** en la contraportada. Si pegas
+una URL completa (`https://...`), el botón se muestra automáticamente.
 
 ### Poner tu foto y tu fondo
 
@@ -103,20 +121,32 @@ photo: "/images/mi-foto.jpg",
 La imagen de fondo se difumina y se oscurece automáticamente con las capas del
 componente `TacticalBackground.astro`. No necesitas editarla.
 
-### Imágenes de los proyectos
+> Todo lo que pongas en `public/images/` se publica tal cual. Borra las imágenes
+> que no uses para que el sitio pese menos.
+
+### Portadas de los proyectos
 
 Los archivos de ejemplo están en `public/images/proyecto-*.svg`. Reemplázalos
 por capturas reales (`.jpg` o `.png`) y actualiza la ruta `image` de cada
 proyecto.
+
+### Tecnologías y experiencia
+
+`skillGroups` es una lista de áreas con una lista de tecnologías (solo texto, se
+muestran como chips). `experience` es la línea de tiempo: periodo, título, lugar,
+descripción y etiqueta.
 
 ---
 
 ## 4. Cambiar colores y tipografías
 
 - **Colores:** `src/styles/global.css`, bloque `@theme` al inicio.
-  - `--color-accent`: rojo de acentos (por defecto `#e11d2e`).
-  - `--color-blood`: rojo oscuro de fondos.
-  - `--color-void`: negro base.
+  - `--color-accent`: cian de acentos (por defecto `#22d3ee`).
+  - `--color-accent-soft`: cian claro para etiquetas (`#67e8f9`).
+  - `--color-blood`: azul profundo de fondos (`#0b3a4a`).
+  - `--color-void`: negro azulado base (`#04080d`).
+  - Si cambias el acento, revisa también las referencias
+    `rgba(34, 211, 238, …)` del mismo archivo y los `color` de cada proyecto.
 - **Tipografías:** se cargan desde Google Fonts en `src/layouts/Layout.astro`.
   - Rajdhani: interfaz.
   - Teko: títulos grandes.
@@ -126,6 +156,20 @@ proyecto.
 - **Esquinas HUD:** variable `--hud-corner` en `global.css` (tamaño de los
   brackets).
 
+### Atmósfera del fondo
+
+El fondo tiene capas sutiles sobre la foto: aurora cian, neblina, un pulso de
+telemetría y polvo en suspensión. Si quieres ajustarlas, edita `opacity` en
+`global.css`:
+
+- `.fx-aurora` → intensidad de las manchas de luz.
+- `.fx-fog` → neblina.
+- `.fx-pulse` → latido de brillo.
+- `.fx-dust` → polvo (se oculta solo en móvil).
+
+Con "Reducir movimiento" activado las capas se quedan quietas, así que el fondo
+sigue teniendo profundidad sin animarse.
+
 ---
 
 ## 5. Estructura del proyecto
@@ -134,18 +178,20 @@ proyecto.
 PortafolioTactico/
 ├─ public/
 │  ├─ favicon.svg
-│  └─ images/                  ← tus fotos e imágenes
+│  └─ images/                       ← tus fotos e imágenes
 ├─ src/
 │  ├─ components/
-│  │  ├─ TacticalBackground.astro   Fondo: foto + capa oscura + ruido + scanlines
+│  │  ├─ TacticalBackground.astro   Fondo: foto + tintes + rejilla + scanlines
 │  │  ├─ Header.astro               Nombre con degradado plateado y rol
 │  │  ├─ MainMenu.astro             Menú vertical de 4 opciones
 │  │  ├─ PreviewPanel.astro         Panel HUD que cambia según la opción
 │  │  ├─ SectionShell.astro         Marco común de las secciones (botón REGRESAR)
-│  │  ├─ AboutSection.astro         Sección 01
-│  │  ├─ ProjectsSection.astro      Sección 02
-│  │  ├─ SkillsSection.astro        Sección 03
-│  │  └─ ContactSection.astro       Sección 04
+│  │  ├─ AboutSection.astro         Módulo 01
+│  │  ├─ ProjectsSection.astro      Módulo 02: tienda de cajas de juego
+│  │  ├─ SkillsSection.astro        Módulo 03: chips de stack y trayectoria
+│  │  ├─ ContactSection.astro       Módulo 04: redes y copiar correo
+│  │  ├─ PadIcon.astro              Símbolos ✕ ○ □ △ y cruceta
+│  │  └─ ButtonPrompts.astro        Barra inferior de guías de botones
 │  ├─ data/
 │  │  └─ portfolio.ts               ← TODOS TUS DATOS
 │  ├─ layouts/
@@ -153,9 +199,10 @@ PortafolioTactico/
 │  ├─ pages/
 │  │  └─ index.astro                Página única que une todo
 │  ├─ scripts/
-│  │  └─ main.ts                    Menú, teclado, foco y navegación
+│  │  ├─ main.ts                    Menú, teclado, foco, volteo y acciones
+│  │  └─ gamepad.ts                 Lectura del control de consola
 │  └─ styles/
-│     └─ global.css                 Tema, HUD, animaciones y accesibilidad
+│     └─ global.css                 Tema, HUD, tienda, animaciones y accesibilidad
 ├─ astro.config.mjs
 ├─ netlify.toml
 └─ package.json
@@ -172,19 +219,41 @@ ocultas. Al elegir una opción, el script:
 4. `Escape` o el botón `REGRESAR` vuelven al menú.
 5. El botón "atrás" del navegador también funciona.
 
+### Cajas de proyecto
+
+- Haz clic en una portada para **voltearla** y ver la contraportada.
+- `Enter` también la voltea cuando está enfocada.
+- `○` o `Escape` cierran la caja abierta (y, si no hay ninguna, vuelven al menú).
+- `△` abre el repositorio de la caja activa; `□` copia tu correo.
+
 ### Teclado
 
 - `↑` / `↓` (o `←` / `→`): mover la selección.
-- `Enter` o `Espacio`: entrar a la sección.
-- `Escape`: regresar al menú.
+- `Enter` o `Espacio`: entrar a la sección o voltear la caja.
+- `Escape`: cerrar la caja / regresar al menú.
 - `Tab`: recorrer los elementos interactivos.
 - El enlace "SALTAR AL CONTENIDO" aparece al tabular desde el inicio.
+
+### Control de consola (opcional)
+
+Conecta un mando de PS5, PS4, Xbox o similar por cable o Bluetooth y **presiona
+un botón** para que el navegador lo detecte (Chrome o Edge en escritorio).
+
+- Cruceta o palanca izquierda: navegar.
+- `✕`: abrir / voltear / activar.
+- `○`: cerrar caja o volver al menú.
+- `△`: abrir el repositorio del proyecto.
+- `□`: copiar el correo.
+
+La barra inferior de guías también aparece en escritorio (pantallas de 640 px o
+más con puntero) y sus botones se pueden pulsar con clic. En móvil o Safari el
+mando no está soportado.
 
 ### Movimiento reducido
 
 Si el sistema operativo tiene activado **"Reducir movimiento"**, las
-animaciones, el parpadeo y el desplazamiento suave se desactivan mediante
-`@media (prefers-reduced-motion: reduce)` en `global.css`.
+animaciones, el parpadeo, el volteo de cajas y el desplazamiento suave se
+desactivan mediante `@media (prefers-reduced-motion: reduce)` en `global.css`.
 
 ---
 
@@ -194,8 +263,8 @@ animaciones, el parpadeo y el desplazamiento suave se desactivan mediante
 npm run build
 ```
 
-Se crea la carpeta `dist/` con el sitio estático (HTML, CSS e imágenes). Esa es
-la carpeta que se publica.
+Se crea la carpeta `dist/` con el sitio estático (HTML, CSS, JS e imágenes). Esa
+es la carpeta que se publica.
 
 Para revisarlo localmente antes de subirlo:
 
@@ -207,30 +276,28 @@ npm run preview
 
 ## 7. Subirlo gratis a internet
 
-### Paso previo: crear el repositorio en GitHub
+### Paso previo: el repositorio en GitHub
 
-1. Crea una cuenta en https://github.com si aún no tienes.
-2. Entra a **github.com/new**.
-3. Nombre del repositorio: `portafolio-tactico` (o el que quieras).
-4. **No** marques "Add a README" (ya tienes uno).
-5. Pulsa **Create repository**.
-6. En la terminal, dentro de la carpeta del proyecto:
+El proyecto ya tiene el remoto `origin` apuntando a
+`https://github.com/Giov0205/Portafolio.git` y la rama `main` sigue a
+`origin/main`. Para subir los commits:
 
-> Este proyecto ya viene con un repositorio Git local y un primer commit. Si es
-> tu caso, sáltate `git init`, `add` y `commit` y ve directo a los comandos de
-> `remote` y `push`.
+```bash
+git push -u origin main
+```
+
+> La primera vez puede pedirte iniciar sesión en GitHub.
+
+Si algún día creas el repositorio desde cero, el flujo sería:
 
 ```bash
 git init
 git add .
-git commit -m "Portafolio táctico con Astro y Tailwind"
+git commit -m "Portafolio HUD con Astro y Tailwind"
 git branch -M main
 git remote add origin https://github.com/TU-USUARIO/portafolio-tactico.git
 git push -u origin main
 ```
-
-> Cambia `TU-USUARIO` por tu usuario real de GitHub.
-> La primera vez puede pedirte iniciar sesión.
 
 A partir de aquí, cada cambio se sube con:
 
@@ -286,16 +353,21 @@ También se vuelve a publicar con cada `git push`.
 | Error de versión de Node | Necesitas Node 22 o superior (`node --version`). |
 | El puerto 4321 está ocupado | `npm run dev -- --port 4322` y abre ese puerto. |
 | No se ve mi imagen | Debe estar en `public/images/` y la ruta debe empezar con `/images/`. |
+| El fondo se ve muy oscuro o muy cargado | Ajusta `opacity` de `.fx-photo` y el alfa de `.fx-tint` en `global.css`. |
 | Las fuentes se ven distintas | Google Fonts necesita internet. Sin conexión se usan fuentes del sistema. |
-| Los botones de proyecto están desactivados | Pega las URLs en `src/data/portfolio.ts`. |
+| No aparece el botón CÓDIGO o DEMO | La URL está vacía en `src/data/portfolio.ts`. |
+| El control no responde | Presiona un botón después de conectarlo; usa Chrome o Edge en escritorio. |
+| El sitio pesa mucho | Revisa `public/images/`: todo lo que está ahí se publica. |
+| El fondo se anima demasiado o no se nota | Ajusta `opacity` de `.fx-aurora`, `.fx-fog`, `.fx-pulse` y `.fx-dust` en `global.css`. |
 | Cambié datos y no veo nada | Guarda el archivo y revisa la terminal; si hay un error de sintaxis, aparece ahí. |
 
 ---
 
 ## 9. Siguientes pasos sugeridos
 
-- Reemplazar todos los `// ← CAMBIA ESTO` por tus datos reales.
-- Añadir capturas reales de ARCUS, DontPetMe y tus demás proyectos.
+- Reemplazar las portadas de ejemplo por capturas reales de cada proyecto.
+- Añadir LinkedIn a `socials` si quieres mostrarlo.
+- Borrar de `public/images/` las imágenes que no uses.
 - Cambiar `site` en `astro.config.mjs` por tu dominio final.
 - Añadir una imagen para compartir en redes (`og:image`) en `Layout.astro`.
 - Crear un `robots.txt` y un `sitemap.xml` si quieres mejorar el SEO.
@@ -303,5 +375,5 @@ También se vuelve a publicar con cada `git push`.
 
 ---
 
-Hecho con Astro + Tailwind CSS. Interfaz inspirada en menús tácticos de
-videojuegos.
+Hecho con Astro + Tailwind CSS. Interfaz inspirada en menús de consola y HUD
+de videojuegos.
