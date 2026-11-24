@@ -197,10 +197,10 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
 
 ## 5. Pendientes
 
-- [ ] **Fotos reales de los proyectos** (prioridad). ✅ EbenConta ya tiene 3
-      capturas; faltan los demás. Hoy cada proyecto usa su
+- [ ] **Fotos reales de los proyectos** (prioridad). ✅ EbenConta (3) y
+      ✅ ARCUS (4) ya tienen capturas; faltan los demás, que siguen con su
       ilustración SVG provisional. Sugerencias:
-      ARCUS (panel, calendario, login) · AgroSense (mapa, gráficas) ·
+      AgroSense (mapa, gráficas) ·
       AirGuard (medidores, alertas) · DontPetMe (renders de Mochi, Copo y
       Trufa; nivel en Unity) · Pokédex Arena (2–3 pantallas) ·
       API NestJS (Postman o Swagger).
@@ -249,6 +249,14 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
 ---
 
 ## 8. Bitácora
+
+### 2026-11-24 (6) — Capturas de ARCUS
+- **ARCUS** ya tiene galería con 4 capturas reales en
+  `public/images/proyectos/arcus-*.webp` (panel, clientes, finanzas y
+  calendario del mes), tomadas con los datos ficticios de su modo demo
+  (`scripts/seed.ts`), en tema oscuro a 1440 px.
+- Se borró la portada provisional `public/images/proyecto-arcus.svg` (ya no
+  se usa).
 
 ### 2026-11-24 (5) — Nuevo proyecto: EbenConta
 - Se agregó **EbenConta** (sistema contable para contadores, 2025) como

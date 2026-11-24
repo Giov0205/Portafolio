@@ -251,7 +251,10 @@ export const projects: Project[] = [
       "Sistema de gestión de clientes y finanzas para asesores. Panel con métricas, control de pagos, metas mensuales, calendario y exportación a CSV. Inicio de sesión con Google y cada asesor ve solo sus propios clientes.",
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "SQLite", "Google OAuth"],
     photos: [
-      { src: "/images/proyecto-arcus.svg", caption: "ARCUS — portada provisional" },
+      { src: "/images/proyectos/arcus-panel.webp", caption: "Panel: por cobrar hoy, clientes en recta final, cobros por mes e indicadores" },
+      { src: "/images/proyectos/arcus-clientes.webp", caption: "Clientes: tabla con ciclo de 47 días, estatus de pago, búsqueda y filtros" },
+      { src: "/images/proyectos/arcus-finanzas.webp", caption: "Finanzas: facturado, cobrado y pendiente del mes, meta mensual y desglose" },
+      { src: "/images/proyectos/arcus-calendario.webp", caption: "Calendario del mes con los cobros de cada cliente según su ciclo" },
     ],
     repo: "", // Repositorio privado: si lo publicas, pon aquí el enlace.
     note: "Repositorio privado",
