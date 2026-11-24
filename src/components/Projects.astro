@@ -1,0 +1,28 @@
+---
+import BoxHead from "./BoxHead.astro";
+import ProjectCard from "./ProjectCard.astro";
+import { projects, projectFilters } from "../data/portfolio";
+---
+
+<section class="dark" id="proyectos">
+  <div class="proj-banner">
+    <div class="wrap">
+      <BoxHead
+        title="Proyectos"
+        text="Aplicaciones web, sistemas IoT, una app móvil y un videojuego en equipo. Toca una imagen para verla en grande."
+        reveal={false}
+      />
+      <div class="filters" role="group" aria-label="Filtrar proyectos" id="filters">
+        {projectFilters.map((f, i) => (
+          <button type="button" data-f={f.id} aria-pressed={i === 0 ? "true" : "false"}>{f.label}</button>
+        ))}
+      </div>
+    </div>
+  </div>
+  <div class="wrap">
+    <ul class="grid" id="grid">
+      {projects.map((p) => <ProjectCard project={p} />)}
+    </ul>
+    <p class="more">Y más en camino.</p>
+  </div>
+</section>

@@ -1,60 +1,28 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import TacticalBackground from "../components/TacticalBackground.astro";
-import Header from "../components/Header.astro";
-import MainMenu from "../components/MainMenu.astro";
-import PreviewPanel from "../components/PreviewPanel.astro";
-import AboutSection from "../components/AboutSection.astro";
-import ProjectsSection from "../components/ProjectsSection.astro";
-import SkillsSection from "../components/SkillsSection.astro";
-import ContactSection from "../components/ContactSection.astro";
-import ButtonPrompts from "../components/ButtonPrompts.astro";
-import { site, ui } from "../data/portfolio";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Band from "../components/Band.astro";
+import About from "../components/About.astro";
+import Skills from "../components/Skills.astro";
+import Projects from "../components/Projects.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import Lightbox from "../components/Lightbox.astro";
 ---
 
 <Layout>
-  <TacticalBackground />
-
-  <div data-app data-view="menu">
-    <main id="contenido">
-      <!-- ================= MENÚ PRINCIPAL ================= -->
-      <div
-        data-menu-screen
-        class="mx-auto flex min-h-dvh w-full max-w-6xl flex-col px-5 pb-6 pt-6 sm:px-8 sm:pt-8 lg:px-10 lg:pt-10"
-      >
-        <Header />
-
-        <div
-          class="mt-8 grid flex-1 grid-cols-1 items-center gap-8 sm:mt-10 lg:grid-cols-[1.05fr_1fr] lg:gap-12"
-        >
-          <MainMenu />
-          <div class="w-full min-w-0">
-            <PreviewPanel />
-          </div>
-        </div>
-
-        <footer class="mt-8 border-t border-white/10 pt-4 text-center">
-          <p class="hud-label hud-label-accent">
-            <span class="hidden sm:inline">{ui.footerDesktop}</span>
-            <span class="sm:hidden">{ui.footerMobile}</span>
-          </p>
-          <p class="mt-2 font-mono text-[9px] tracking-[0.2em] text-white/25">
-            © {new Date().getFullYear()} {site.name} · ASTRO + TAILWIND CSS
-          </p>
-        </footer>
-      </div>
-
-      <!-- ================= SECCIONES ================= -->
-      <AboutSection />
-      <ProjectsSection />
-      <SkillsSection />
-      <ContactSection />
-    </main>
-
-    <p class="sr-only" role="status" aria-live="polite" data-announcer></p>
-  </div>
-
-  <ButtonPrompts />
+  <Nav />
+  <main>
+    <Hero />
+    <Band />
+    <About />
+    <Skills />
+    <Projects />
+    <Contact />
+  </main>
+  <Footer />
+  <Lightbox />
 </Layout>
 
 <script>

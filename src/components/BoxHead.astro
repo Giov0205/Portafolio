@@ -1,0 +1,15 @@
+---
+/** Título de sección dentro de un recuadro, con texto opcional debajo. */
+interface Props {
+  title: string;
+  text?: string;
+  reveal?: boolean;
+  id?: string;
+}
+const { title, text, reveal = true, id } = Astro.props;
+---
+
+<div class:list={["boxhead", { reveal }]}>
+  <h2 id={id}>{title}</h2>
+  {text && <p>{text}</p>}
+</div>

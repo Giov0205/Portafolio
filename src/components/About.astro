@@ -1,0 +1,44 @@
+---
+import BoxHead from "./BoxHead.astro";
+import Divider from "./Divider.astro";
+import Icon from "./Icon.astro";
+import { about } from "../data/portfolio";
+---
+
+<section class="section light" id="sobre-mi">
+  <div class="wrap">
+    <BoxHead title="Sobre mí" />
+
+    <div class="about reveal">
+      <div>
+        <p class="lead">{about.lead}</p>
+      </div>
+      <div class="body">
+        {about.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+    </div>
+
+    <Divider />
+
+    <div class="services reveal">
+      {about.services.map((s) => (
+        <div class="svc">
+          <Icon name={s.icon} />
+          <h3>{s.title}</h3>
+          <p>{s.text}</p>
+        </div>
+      ))}
+    </div>
+
+    <Divider />
+
+    <div class="reveal">
+      <h3 class="label goals-title">Objetivos</h3>
+      <ol class="goals">
+        {about.goals.map((g, i) => (
+          <li><b>{String(i + 1).padStart(2, "0")}</b><span>{g}</span></li>
+        ))}
+      </ol>
+    </div>
+  </div>
+</section>

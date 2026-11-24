@@ -1,0 +1,40 @@
+---
+import BoxHead from "./BoxHead.astro";
+import Divider from "./Divider.astro";
+import { skillGroups, experience } from "../data/portfolio";
+---
+
+<section class="section light no-top" id="habilidades">
+  <div class="wrap">
+    <BoxHead title="Habilidades" text="Solo tecnologías que he usado en mis proyectos." />
+
+    <div class="skills">
+      {skillGroups.map((g) => (
+        <div class="group reveal">
+          <h3>{g.name}:</h3>
+          <div class="tiles">
+            {g.skills.map((s) => (
+              <div class="tile"><i aria-hidden="true">{s.abbr}</i><span>{s.name}</span></div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <Divider />
+
+    <div class="boxhead reveal tight"><h2 id="trayectoria">Trayectoria</h2></div>
+    <ol class="timeline">
+      {experience.map((e) => (
+        <li class="reveal">
+          <div><div class="yr">{e.period}</div><span class="tag">{e.tag}</span></div>
+          <div>
+            <h4>{e.title}</h4>
+            <p class="pl">{e.place}</p>
+            <p>{e.description}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

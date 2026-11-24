@@ -1,0 +1,36 @@
+---
+import BoxHead from "./BoxHead.astro";
+import Icon from "./Icon.astro";
+import { site, contact } from "../data/portfolio";
+---
+
+<section class="section light" id="contacto">
+  <div class="wrap">
+    <BoxHead title="Contacto" text={contact.intro} />
+    <div class="contact reveal">
+      <form id="form" novalidate data-email={site.email}>
+        <label class="field"><span>Tu nombre *</span><input id="f-name" name="name" autocomplete="name" required /></label>
+        <label class="field"><span>Tu correo *</span><input id="f-mail" name="email" type="email" autocomplete="email" required /></label>
+        <label class="field"><span>Mensaje *</span><textarea id="f-msg" name="message" rows="5" required></textarea></label>
+        <div class="form-foot">
+          <button class="ghost ink" type="submit">Enviar</button>
+          <span class="form-note" id="formNote">Se abrirá tu app de correo con el mensaje listo.</span>
+        </div>
+      </form>
+
+      <aside class="direct">
+        <h3>{contact.status}</h3>
+        <p>{contact.statusText}</p>
+        <ul class="rows">
+          <li><a href={`mailto:${site.email}`}><Icon name="mail" /><span><small>Correo</small><strong>{site.email}</strong></span></a></li>
+          <li><a href={site.github} target="_blank" rel="noopener noreferrer"><Icon name="github" /><span><small>GitHub</small><strong>{site.githubHandle}</strong></span></a></li>
+          {contact.linkedin && (
+            <li><a href={contact.linkedin.href} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" /><span><small>{contact.linkedin.label}</small><strong>{contact.linkedin.handle}</strong></span></a></li>
+          )}
+          <li><div><Icon name="pin" /><span><small>Ubicación</small><strong>{site.city}</strong></span></div></li>
+        </ul>
+        <button class="ghost ink copy" type="button" id="copy" data-email={site.email}>Copiar correo</button>
+      </aside>
+    </div>
+  </div>
+</section>

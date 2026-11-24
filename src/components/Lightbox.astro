@@ -1,0 +1,16 @@
+---
+import Icon from "./Icon.astro";
+---
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbTitle" hidden>
+  <div class="lb-top">
+    <p id="lbTitle"></p>
+    <button class="lb-x" id="lbClose" type="button" aria-label="Cerrar"><Icon name="close" size={22} /></button>
+  </div>
+  <div class="lb-stage">
+    <img id="lbImg" alt="" />
+    <button class="lb-nav lb-prev" id="lbPrev" type="button" aria-label="Foto anterior"><Icon name="prev" size={22} /></button>
+    <button class="lb-nav lb-next" id="lbNext" type="button" aria-label="Foto siguiente"><Icon name="next" size={22} /></button>
+  </div>
+  <p class="lb-cap" id="lbCap"></p>
+</div>

@@ -1,0 +1,18 @@
+---
+import Icon from "./Icon.astro";
+import { site, contact } from "../data/portfolio";
+const year = new Date().getFullYear();
+---
+
+<footer class="foot">
+  <a class="top" href="#inicio"><Icon name="up" size={16} />Volver arriba</a>
+  <div class="icons">
+    <a href={`mailto:${site.email}`} aria-label="Correo"><Icon name="mail" /></a>
+    <a href={site.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub"><Icon name="github" /></a>
+    {contact.linkedin && (
+      <a href={contact.linkedin.href} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><Icon name="linkedin" /></a>
+    )}
+  </div>
+  <p>© {year} <b>{site.name}</b>. Todos los derechos reservados.</p>
+</footer>
+<p class="toast" id="toast" role="status" aria-live="polite" hidden></p>

@@ -1,0 +1,27 @@
+---
+import Icon from "./Icon.astro";
+
+const links = [
+  { href: "#sobre-mi", label: "Sobre mí" },
+  { href: "#habilidades", label: "Habilidades" },
+  { href: "#proyectos", label: "Proyectos" },
+];
+---
+
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#inicio" aria-label="Giovanni Medina, inicio">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M24 3 42 13.5v21L24 45 6 34.5v-21Z" fill="none" stroke="currentColor" stroke-width="3"></path>
+        <text x="24" y="29.5" text-anchor="middle" font-family="Montserrat,sans-serif" font-weight="700" font-size="14" fill="currentColor">GM</text>
+      </svg>
+    </a>
+    <button class="menu-btn" id="menuBtn" type="button" aria-expanded="false" aria-controls="links" aria-label="Abrir menú">
+      <Icon name="menu" size={26} />
+    </button>
+    <ul class="links" id="links">
+      {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+      <li><a class="cta" href="#contacto">Contáctame</a></li>
+    </ul>
+  </div>
+</header>
