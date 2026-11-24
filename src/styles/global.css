@@ -94,9 +94,6 @@ h1,h2,h3,h4,p{margin:0}
 .about .lead{font:600 clamp(19px,1.7vw,23px)/1.5 Raleway,sans-serif}
 .about .body p+p{margin-top:16px}
 .about .body{color:var(--body)}
-.goals{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,4vw,56px)}
-.goals li{border-top:2px solid var(--ink);padding-top:18px;color:var(--body)}
-.goals li::before{content:"";display:block;width:10px;height:10px;background:var(--ink);margin-bottom:14px}
 .services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,4vw,56px)}
 .svc .ic{width:52px;height:52px;display:grid;place-items:center;border:2px solid var(--ink);margin-bottom:20px}
 .svc .ic svg{width:24px;height:24px}
@@ -247,7 +244,7 @@ h1,h2,h3,h4,p{margin:0}
  .filters{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}
  .filters button{flex:none}
  .about,.contact{grid-template-columns:minmax(0,1fr)}
- .services,.goals{grid-template-columns:minmax(0,1fr);gap:32px}
+ .services{grid-template-columns:minmax(0,1fr);gap:32px}
 }
 @media (max-width:600px){
  .grid{grid-template-columns:minmax(0,1fr)}
@@ -263,4 +260,3 @@ h1,h2,h3,h4,p{margin:0}
 /* Utilidades de sección */
 .section.no-top{padding-top:0}
 .boxhead.tight{margin-bottom:32px}
-.goals-title{text-align:center;margin-bottom:28px}

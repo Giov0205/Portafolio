@@ -70,7 +70,7 @@ npm run preview
 | `src/components/Nav.astro` | Barra fija + menú móvil |
 | `src/components/Hero.astro` | Portada partida en diagonal con foto |
 | `src/components/Band.astro` | Franja negra con cifras |
-| `src/components/About.astro` | Sobre mí, áreas, objetivos |
+| `src/components/About.astro` | Sobre mí y áreas |
 | `src/components/Skills.astro` | Habilidades y trayectoria |
 | `src/components/Projects.astro` | Encabezado, filtros y rejilla |
 | `src/components/ProjectCard.astro` | Tarjeta con galería |

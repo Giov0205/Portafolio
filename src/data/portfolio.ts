@@ -65,11 +65,6 @@ export const about = {
       text: "Personajes modelados y animados en Blender y niveles construidos en Unity con C#.",
     },
   ],
-  goals: [
-    "Conseguir prácticas profesionales donde participe en productos reales de principio a fin.",
-    "Terminar y publicar DontPetMe junto con mi equipo.",
-    "Seguir mejorando como desarrollador full stack y compartir lo que aprendo.",
-  ],
 } as const;
 
 /** HABILIDADES — abbr es el texto del cuadrito; name, el nombre completo. */

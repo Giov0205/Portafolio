@@ -83,7 +83,7 @@ blanco y negro**, inspirado en el template de Figma *Portfolio — Tomasz Gajda*
 | `src/components/Nav.astro` | Barra de navegación y menú móvil |
 | `src/components/Hero.astro` | Portada partida en diagonal |
 | `src/components/Band.astro` | Franja negra con UT Cancún y cifras |
-| `src/components/About.astro` | Sobre mí, áreas y objetivos |
+| `src/components/About.astro` | Sobre mí y áreas |
 | `src/components/Skills.astro` | Habilidades y trayectoria |
 | `src/components/Projects.astro` | Sección de proyectos y filtros |
 | `src/components/ProjectCard.astro` | Tarjeta de proyecto con galería |
@@ -248,6 +248,12 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
 ---
 
 ## 8. Bitácora
+
+### 2026-11-24 (4) — Se quita Objetivos
+- Se eliminó la sección "Objetivos" de Sobre mí (datos `about.goals`,
+  estilos `.goals` y `.goals-title`) a pedido del usuario.
+- Se probó una foto nueva (en un bote) para el hero; el usuario prefirió
+  quedarse con la foto anterior (`perfil-sin-fondo.webp` no cambia).
 
 ### 2026-11-24 (3) — Foto sin fondo e íconos
 - Foto nueva en alta resolución, sin fondo, en el hero.

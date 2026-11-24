@@ -46,7 +46,7 @@ npm run dev     # abre http://localhost:4321
 | --- | --- |
 | Nombre, rol, correo, GitHub, foto | `site` |
 | Franja negra (UT Cancún y cifras) | `band` |
-| Texto de "Sobre mí", áreas y objetivos | `about` |
+| Texto de "Sobre mí" y áreas | `about` |
 | Habilidades (cuadritos) | `skillGroups` |
 | Trayectoria | `experience` |
 | Proyectos, fotos y enlaces | `projects` |
@@ -130,7 +130,7 @@ PortafolioTactico/
 │  │  ├─ Nav.astro           Barra de navegación y menú móvil
 │  │  ├─ Hero.astro          Portada partida en diagonal
 │  │  ├─ Band.astro          Franja negra (UT Cancún y cifras)
-│  │  ├─ About.astro         Sobre mí, áreas y objetivos
+│  │  ├─ About.astro         Sobre mí y áreas
 │  │  ├─ Skills.astro        Habilidades y trayectoria
 │  │  ├─ Projects.astro      Proyectos y filtros
 │  │  ├─ ProjectCard.astro   Tarjeta con galería de fotos
