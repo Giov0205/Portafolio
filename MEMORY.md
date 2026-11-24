@@ -197,7 +197,8 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
 
 ## 5. Pendientes
 
-- [ ] **Fotos reales de los proyectos** (prioridad). Hoy cada proyecto usa su
+- [ ] **Fotos reales de los proyectos** (prioridad). ✅ EbenConta ya tiene 3
+      capturas; faltan los demás. Hoy cada proyecto usa su
       ilustración SVG provisional. Sugerencias:
       ARCUS (panel, calendario, login) · AgroSense (mapa, gráficas) ·
       AirGuard (medidores, alertas) · DontPetMe (renders de Mochi, Copo y
@@ -248,6 +249,17 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
 ---
 
 ## 8. Bitácora
+
+### 2026-11-24 (5) — Nuevo proyecto: EbenConta
+- Se agregó **EbenConta** (sistema contable para contadores, 2025) como
+  primer proyecto, con galería de 3 capturas reales en
+  `public/images/proyectos/ebenconta-*.webp` (inicio, ingresos y egresos,
+  vencimientos). Repositorio privado.
+- Nueva entrada en Trayectoria (2025) y la franja pasa a **07 proyectos**.
+- Las fotos de las tarjetas ahora se alinean arriba (`object-position: top`)
+  para que en las capturas se vea el encabezado de la app.
+- El visor limita el alto de la foto (`max-height: calc(100svh - 170px)`) para
+  que las capturas altas no tapen la descripción.
 
 ### 2026-11-24 (4) — Se quita Objetivos
 - Se eliminó la sección "Objetivos" de Sobre mí (datos `about.goals`,

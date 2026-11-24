@@ -34,7 +34,7 @@ export const band = {
   title: "Universidad Tecnológica de Cancún",
   text: "Estudios universitarios en curso en Cancún, Quintana Roo. Busco prácticas profesionales donde participe en productos reales de principio a fin.",
   stats: [
-    { value: "06", label: "Proyectos" },
+    { value: "07", label: "Proyectos" },
     { value: "03", label: "Con código público" },
     { value: "4", label: "Áreas: web, IoT, móvil, juegos" },
   ],
@@ -158,6 +158,14 @@ export const experience: TimelineEntry[] = [
   {
     period: "2025",
     tag: "Terminado",
+    title: "Desarrollo full stack",
+    place: "EbenConta · Sistema contable",
+    description:
+      "Sistema para contadores en React y Express con PostgreSQL: lectura de facturas XML, cálculo de ingresos, egresos e IVA, tablero con gráficas y vencimientos, y verificación en dos pasos por correo.",
+  },
+  {
+    period: "2025",
+    tag: "Terminado",
     title: "Proyectos IoT",
     place: "AgroSense · AirGuard",
     description:
@@ -214,6 +222,24 @@ export const projectFilters: { id: "todos" | ProjectCategory; label: string }[] 
 ];
 
 export const projects: Project[] = [
+  {
+    id: "ebenconta",
+    name: "EbenConta",
+    category: "web",
+    area: "Web · Full stack",
+    year: "2025",
+    status: "Terminado",
+    description:
+      "Sistema para contadores: subes el XML de las facturas de cada cliente y calcula solo ingresos, egresos, balance e IVA por mes. Tablero con gráficas, seguimiento de vencimientos fiscales, filtros, exportación a CSV e inicio de sesión con código de verificación por correo.",
+    tech: ["React", "TypeScript", "Vite", "Express", "PostgreSQL", "Sequelize", "JWT", "Nodemailer"],
+    photos: [
+      { src: "/images/proyectos/ebenconta-inicio.webp", caption: "Inicio: panorama del mes, resumen por cliente, avance y próximos vencimientos" },
+      { src: "/images/proyectos/ebenconta-ingresos.webp", caption: "Ingresos y egresos: totales del periodo, gráfica mes con mes y balance por cliente" },
+      { src: "/images/proyectos/ebenconta-vencimientos.webp", caption: "Vencimientos agrupados por urgencia: vencidos, esta semana y más adelante" },
+    ],
+    repo: "", // Repositorio privado: si lo publicas, pon aquí el enlace.
+    note: "Repositorio privado",
+  },
   {
     id: "arcus",
     name: "ARCUS",

@@ -135,7 +135,7 @@ h1,h2,h3,h4,p{margin:0}
 .shots{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;aspect-ratio:16/10}
 .shots::-webkit-scrollbar{display:none}
 .shot{flex:0 0 100%;scroll-snap-align:start;border:0;padding:0;margin:0;background:var(--deep);cursor:zoom-in;overflow:hidden}
-.shot img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) brightness(.85);transition:filter .5s,transform .6s}
+.shot img{width:100%;height:100%;object-fit:cover;object-position:top;filter:grayscale(1) brightness(.85);transition:filter .5s,transform .6s}
 .card:hover .shot img,.card:focus-within .shot img{filter:none}
 .shot:hover img{transform:scale(1.03)}
 .gallery .st{position:absolute;left:14px;top:14px;background:#fff;color:#000;font:700 10px/1 Montserrat,sans-serif;letter-spacing:.14em;padding:7px 9px;pointer-events:none}
@@ -169,8 +169,9 @@ h1,h2,h3,h4,p{margin:0}
 .lb-top p{font:600 12px Montserrat,sans-serif;letter-spacing:.16em;text-transform:uppercase}
 .lb-x{width:48px;height:48px;border:1px solid rgba(255,255,255,.3);background:none;color:#fff;cursor:pointer;display:grid;place-items:center}
 .lb-x:hover{background:#fff;color:#000}
-.lb-stage{position:relative;display:grid;place-items:center;padding:0 max(4vw,16px)}
-.lb-stage img{max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+/* La foto nunca pasa del alto disponible: deja ver la barra de arriba y la descripción. */
+.lb-stage{position:relative;display:grid;place-items:center;padding:0 max(4vw,16px);min-height:0;overflow:hidden}
+.lb-stage img{max-width:100%;max-height:calc(100svh - 170px);width:auto;height:auto;object-fit:contain;box-shadow:0 30px 80px rgba(0,0,0,.6)}
 .lb-nav{position:absolute;top:50%;transform:translateY(-50%);width:52px;height:52px;border:1px solid rgba(255,255,255,.3);background:rgba(0,0,0,.5);color:#fff;cursor:pointer;display:grid;place-items:center}
 .lb-nav:hover{background:#fff;color:#000}
 .lb-prev{left:max(2vw,8px)}.lb-next{right:max(2vw,8px)}
@@ -255,6 +256,7 @@ h1,h2,h3,h4,p{margin:0}
  .band-mark{font-size:160px}
  .lb-nav{top:auto;bottom:-62px;transform:none}
  .lb-stage{margin-bottom:62px}
+ .lb-stage img{max-height:calc(100svh - 240px)}
 }
 
 /* Utilidades de sección */
