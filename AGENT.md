@@ -26,7 +26,9 @@ Diseño profesional en **blanco y negro** inspirado en el template de Figma
    `aria-pressed` en filtros, `aria-expanded` en el menú móvil, visor con
    `role="dialog"`, `aria-modal`, foco atrapado y devuelto al cerrar, `alt` en
    todas las fotos (viene de `caption`).
-4. **Respetar `prefers-reduced-motion`** en cualquier animación nueva.
+4. **Respetar `prefers-reduced-motion`** en cualquier animación nueva. El único
+   momento de movimiento es la entrada del hero; **no agregar** animaciones de
+   aparición por scroll ni ocultar contenido hasta que cargue el JS.
 5. **No cambiar la identidad visual** (gris/negro/blanco, Raleway +
    Montserrat, títulos en recuadro, hero en diagonal) sin que el usuario lo
    pida. El usuario **rechazó** un acento amarillo y la foto recortada.
@@ -34,6 +36,10 @@ Diseño profesional en **blanco y negro** inspirado en el template de Figma
 7. **No inventar datos personales** ni fotos de proyectos. Las portadas SVG
    son provisionales.
 8. **No usar logos oficiales** de tecnologías; se usan abreviaturas.
+9. **Contraste mínimo** 4.5:1 en texto normal y 3:1 en texto grande. Usar las
+   variables de color de `:root`; no escribir grises sueltos.
+10. **Skills del proyecto** en `.claude/skills` (impeccable, web-design-guidelines,
+   ui-ux-pro-max…). Para revisar, usar `impeccable audit` / `critique`.
 
 ## 3. Stack
 
@@ -90,12 +96,12 @@ npm run preview
 
 `nav`, `menuBtn`, `links`, `filters`, `grid`, `lb`, `lbImg`, `lbTitle`,
 `lbCap`, `lbPrev`, `lbNext`, `lbClose`, `toast`, `copy`, `form`, `f-name`,
-`f-mail`, `f-msg`, `formNote`.
+`f-mail`, `f-msg`, `formNote`, `e-name`, `e-mail`, `e-msg`, `contenido`.
 
 Clases con comportamiento: `.gallery` (`data-name`), `.shots`, `.shot`
 (`data-i`, `data-src`, `data-caption`), `.g-prev`, `.g-next`, `.count .n`,
-`.dots i`, `.card` (`data-cat`), `.reveal` → `.in`, `.nav.solid`, `.nav.open`,
-`body.lock`.
+`.dots i`, `.card` (`data-cat`), `.nav.solid`, `.nav.open`, `body.lock`,
+`.field-wrap` / `.err` (errores del formulario, `aria-invalid`).
 
 ## 8. Recetas
 
@@ -105,15 +111,18 @@ Clases con comportamiento: `.gallery` (`data-name`), `.shots`, `.shot`
 - **Agregar un filtro**: nueva categoría en `ProjectCategory` y en
   `projectFilters`.
 - **Agregar una habilidad**: `{ abbr, name }` en el grupo de `skillGroups`.
-- **Cambiar colores**: variables en `:root` de `global.css`.
+- **Cambiar colores**: variables en `:root` de `global.css` (agrupadas: fondos
+  claros, tinta, fondos oscuros, texto sobre oscuro, estados).
 
 ## 9. Verificación antes de terminar
 
 1. `npm run check` sin errores.
 2. `npm run build` correcto.
 3. Revisar en 1440, 1024, 768 y 390 px: sin scroll horizontal.
-4. Probar con teclado: menú, filtros, galería (← →), visor (Escape).
-5. Actualizar `MEMORY.md` (qué cambió, pendientes, bitácora).
+4. Probar con teclado: menú, filtros, galería (← →), visor (Escape), formulario
+   vacío (debe enfocar el primer error).
+5. Medir contraste de los textos nuevos (≥4.5:1).
+6. Actualizar `MEMORY.md` (qué cambió, pendientes, bitácora).
 
 ## 10. Despliegue
 

@@ -5,8 +5,9 @@
 > archivo al final de cada sesión de trabajo.
 >
 > Última actualización: **2026-11-24**
-> Estado: **rediseño profesional (v3) migrado a Astro**. Falta poner fotos
-> reales de los proyectos.
+> Estado: **rediseño profesional (v3) migrado a Astro y corregido tras la
+> auditoría de diseño/accesibilidad**. Falta poner fotos reales de los
+> proyectos y una foto de perfil de mayor resolución.
 
 ---
 
@@ -111,6 +112,39 @@ Referencias de Figma:
 - Portfo (Resume Template): `https://www.figma.com/design/7V3cY2ybsCw84iyioWyz2o/`
 - Developer Portfolio: `https://www.figma.com/design/VLZeritz7D6y8tfjfKW7So/`
 
+### Correcciones de la auditoría (2026-11-24, segunda subida)
+
+Auditoría hecha con las skills de `.claude/skills` (**impeccable** `audit` +
+**web-design-guidelines**). Nota inicial: **13/20**. Reporte completo en el
+proyecto de Claude "REDISEÑO GIO" (`auditoria-portafolio-2026-11-24.md`).
+
+| Problema | Arreglo |
+| --- | --- |
+| Menú blanco ilegible sobre el gris entre 821 y 1100 px | Los enlaces llevan una píldora negra mientras la barra es transparente (`global.css`, regla `.nav:not(.solid) .links`) |
+| Subtítulo del hero con contraste 2.25:1 | Ahora usa `--mute` (≈5.3:1) |
+| "Repositorio privado" con 4.48:1 | Ahora `--on-dark-3` (#8a8a8a, ≈5.3:1) |
+| Títulos saltaban de h2 a h4 en Trayectoria | Ahora h3 |
+| Formulario: errores sin anunciar ni enfocar | Mensaje de error junto a cada campo, `aria-invalid`, foco al primer campo con error, nota con `aria-live` |
+| Correo con corrector ortográfico | `spellcheck="false"`, `autocapitalize="off"`, `inputmode="email"` |
+| Foco de los campos casi invisible | Fondo blanco + contorno negro de 2 px en todo el campo |
+| Sin JavaScript el contenido quedaba invisible | Se quitó la aparición por scroll (`.reveal`); todo es visible siempre |
+| La misma animación en todas las secciones | Un solo momento de movimiento: la foto del hero se descubre en diagonal y el texto sube en cascada (solo CSS, se apaga con "Reducir movimiento") |
+| Sombra dura `4px 4px 0` en los cuadritos de habilidades | Quitada; al pasar el mouse el cuadro se invierte (negro con texto blanco) |
+| Números 01/02/03 en Objetivos | Cambiados por un cuadrito negro (el orden no significaba nada) |
+| ~25 grises escritos a mano | Variables en `:root`: `--paper-hi`, `--tile`, `--body`, `--body-2`, `--rule`, `--card`, `--deep`, `--on-dark-hi`, `--on-dark`, `--on-dark-2`, `--on-dark-3`, `--error` |
+| 1.6 MB de imágenes sin usar que se publicaban | Borradas: `Escenario gamer futurista de neón cian.png`, `WhatsApp Image 2026-11-15 at 10.23.25 PM.jpeg`, `fondo.jpg`, `fondo.svg`, `perfil.svg`, `proyecto-torneos.svg` |
+| Foto del hero sin prioridad de carga | `fetchpriority="high"` |
+| `theme-color` no coincidía con el fondo | Ahora `#e6e6e6` |
+| Faltaban `canonical` y `og:image` | Agregados en `Layout.astro` (se arman con `site` de `astro.config.mjs`) |
+| Visor sin contener el scroll; flechas de 40 px | `overscroll-behavior: contain`; flechas de 44 px |
+| Selección de texto y scrollbar por defecto | Selección negra (blanca en zonas oscuras) y scrollbar con colores del sitio |
+| "Saltar al contenido" iba a Sobre mí | Ahora va a `<main id="contenido">` |
+| Botón "Enviar" poco claro | Ahora "Enviar por correo" |
+
+**No se pudo arreglar desde código:** la foto del hero mide 600 px y en
+escritorio se muestra a ~835 px, por eso se ve algo borrosa. Hace falta una foto
+de al menos 1200 px de ancho.
+
 ---
 
 ## 3. Cómo retomar en 30 segundos
@@ -151,17 +185,14 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
       Trufa; nivel en Unity) · Pokédex Arena (2–3 pantallas) ·
       API NestJS (Postman o Swagger).
       Guardarlas en `public/images/proyectos/` y listarlas en `photos`.
-- [ ] Foto de perfil más profesional (de frente, buena luz, fondo liso).
+- [ ] Foto de perfil de **al menos 1200 px de ancho** (la actual mide 600 px y
+      se ve borrosa en escritorio). Ideal: de frente, buena luz, fondo liso.
 - [ ] Añadir LinkedIn en `contact.linkedin` si existe.
 - [ ] **ARCUS**: repo privado; si se publica, poner URL en `repo`.
 - [ ] **Pokédex Arena**: sin repo; poner URL si se sube.
 - [ ] **DontPetMe**: el enlace apunta al GDD, no al juego.
-- [ ] Limpiar `public/images/`: ya no se usan `fondo.jpg`, `fondo.svg`,
-      `perfil.svg`, `proyecto-torneos.svg`,
-      `Escenario gamer futurista de neón cian.png` (~1.4 MB) ni
-      `WhatsApp Image 2026-11-15 at 10.23.25 PM.jpeg`. Se copian a `dist/`.
-- [ ] Añadir `og:image` en `Layout.astro`.
-- [ ] Cambiar `site` en `astro.config.mjs` por el dominio final.
+- [ ] Cambiar `site` en `astro.config.mjs` por el dominio final (de ahí salen
+      `canonical` y `og:image`).
 - [ ] Desplegar (Vercel o Netlify).
 
 ---
@@ -184,8 +215,11 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
   componente, cámbialo en el script.
 - **Galería**: cada foto es un `<button class="shot">` con `data-src` y
   `data-caption`; el visor lee esos atributos. No hay JSON duplicado.
-- **Clase `.reveal`**: empieza invisible y aparece con IntersectionObserver.
-  Si un elemento no aparece, revisa que el script cargue.
+- **Movimiento**: solo la entrada del hero (`hero-wipe`, `hero-rise` en
+  `global.css`). No volver a agregar animaciones de aparición por scroll: la
+  auditoría las marcó (contenido invisible sin JS y movimiento repetido).
+- **Formulario**: cada campo tiene su mensaje de error (`e-name`, `e-mail`,
+  `e-msg`) enlazado con `aria-describedby`; el script pone `aria-invalid`.
 - **`body.lock`** bloquea el scroll mientras el visor está abierto.
 - **Imágenes**: en `public/`, rutas que empiezan con `/images/...`. Todo lo
   que esté ahí se publica.
@@ -195,6 +229,11 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
 ---
 
 ## 8. Bitácora
+
+### 2026-11-24 (2) — Correcciones de la auditoría
+- Auditoría con las skills impeccable y web-design-guidelines (13/20).
+- Arreglados todos los hallazgos posibles desde código (ver sección 2).
+- Borradas 6 imágenes sin uso (~1.6 MB).
 
 ### 2026-11-24 — Rediseño profesional (v3) y galerías
 - Diseño HUD reemplazado por diseño blanco y negro (ver sección 2).

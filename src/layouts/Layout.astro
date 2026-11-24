@@ -8,6 +8,9 @@ interface Props {
 }
 
 const { title = `${site.name} — Portafolio`, description = site.description } = Astro.props;
+// Dirección pública del sitio: se toma de `site` en astro.config.mjs.
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(site.photo, Astro.site);
 ---
 
 <!doctype html>
@@ -15,15 +18,20 @@ const { title = `${site.name} — Portafolio`, description = site.description } 
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0d0d0d" />
+    <meta name="theme-color" content="#e6e6e6" />
     <meta name="description" content={description} />
     <meta name="author" content={site.name} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonical} />
 
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content="es_MX" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={`Retrato de ${site.name}`} />
+    <meta name="twitter:card" content="summary" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,7 +43,7 @@ const { title = `${site.name} — Portafolio`, description = site.description } 
     <title>{title}</title>
   </head>
   <body>
-    <a class="skip" href="#sobre-mi">Saltar al contenido</a>
+    <a class="skip" href="#contenido">Saltar al contenido</a>
     <slot />
   </body>
 </html>

@@ -3,13 +3,12 @@
 interface Props {
   title: string;
   text?: string;
-  reveal?: boolean;
   id?: string;
 }
-const { title, text, reveal = true, id } = Astro.props;
+const { title, text, id } = Astro.props;
 ---
 
-<div class:list={["boxhead", { reveal }]}>
+<div class="boxhead">
   <h2 id={id}>{title}</h2>
   {text && <p>{text}</p>}
 </div>

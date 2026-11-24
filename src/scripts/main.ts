@@ -4,8 +4,8 @@
  * - Filtros de proyectos.
  * - Galería de fotos dentro de cada tarjeta de proyecto.
  * - Visor ampliado (lightbox) con teclado.
- * - Copiar correo y formulario que abre la app de correo.
- * - Aparición suave de secciones al hacer scroll.
+ * - Copiar correo y formulario que abre la app de correo (con validación
+ *   campo por campo y errores anunciados).
  */
 
 const $ = <T extends HTMLElement>(id: string) => document.getElementById(id) as T | null;
@@ -189,38 +189,52 @@ if (copyBtn) copyBtn.addEventListener("click", async () => {
 
 /* ---------- Formulario (abre la app de correo) ---------- */
 const form = $<HTMLFormElement>("form");
-if (form) form.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const email = form.dataset.email ?? "";
-  const name = ($<HTMLInputElement>("f-name")?.value ?? "").trim();
-  const from = ($<HTMLInputElement>("f-mail")?.value ?? "").trim();
-  const msg = ($<HTMLTextAreaElement>("f-msg")?.value ?? "").trim();
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+type FieldCheck = { input: HTMLInputElement | HTMLTextAreaElement; error: HTMLElement; valid: () => boolean };
+
+const setInvalid = (f: FieldCheck, invalid: boolean) => {
+  f.input.setAttribute("aria-invalid", String(invalid));
+  f.error.hidden = !invalid;
+};
+
+if (form) {
   const note = $("formNote");
+  const rules: { input: string; error: string; test: (v: string) => boolean }[] = [
+    { input: "f-name", error: "e-name", test: (v) => v.length > 0 },
+    { input: "f-mail", error: "e-mail", test: (v) => EMAIL_RE.test(v) },
+    { input: "f-msg", error: "e-msg", test: (v) => v.length > 0 },
+  ];
+  const fields: FieldCheck[] = rules.flatMap((r) => {
+    const input = $<HTMLInputElement | HTMLTextAreaElement>(r.input);
+    const error = $(r.error);
+    if (!input || !error) return [];
+    return [{ input, error, valid: () => r.test(input.value.trim()) }];
+  });
 
-  if (!name || !msg || !/^\S+@\S+\.\S+$/.test(from)) {
-    if (note) note.textContent = "Completa nombre, un correo válido y tu mensaje.";
-    return;
-  }
-  const subject = encodeURIComponent(`Contacto desde el portafolio — ${name}`);
-  const body = encodeURIComponent(`${msg}\n\n— ${name} (${from})`);
-  window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
-  if (note) note.textContent = `Si no se abrió tu correo, escríbeme a ${email}`;
-});
-
-/* ---------- Aparición al hacer scroll ---------- */
-const reveals = document.querySelectorAll(".reveal");
-if ("IntersectionObserver" in window) {
-  const io = new IntersectionObserver(
-    (entries) =>
-      entries.forEach((x) => {
-        if (x.isIntersecting) {
-          x.target.classList.add("in");
-          io.unobserve(x.target);
-        }
-      }),
-    { threshold: 0.12 },
+  // Al corregir un campo marcado, se quita el error en cuanto vuelve a ser válido.
+  fields.forEach((f) =>
+    f.input.addEventListener("input", () => {
+      if (f.input.getAttribute("aria-invalid") === "true" && f.valid()) setInvalid(f, false);
+    }),
   );
-  reveals.forEach((el) => io.observe(el));
-} else {
-  reveals.forEach((el) => el.classList.add("in"));
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = form.dataset.email ?? "";
+    const invalid = fields.filter((f) => !f.valid());
+    fields.forEach((f) => setInvalid(f, invalid.includes(f)));
+
+    if (invalid.length) {
+      if (note) note.textContent = invalid.length === 1 ? "Revisa el campo marcado." : `Revisa los ${invalid.length} campos marcados.`;
+      invalid[0].input.focus();
+      return;
+    }
+
+    const [name, from, msg] = fields.map((f) => f.input.value.trim());
+    const subject = encodeURIComponent(`Contacto desde el portafolio — ${name}`);
+    const body = encodeURIComponent(`${msg}\n\n— ${name} (${from})`);
+    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+    if (note) note.textContent = `Se abrió tu app de correo. Si no apareció, escríbeme a ${email}`;
+  });
 }

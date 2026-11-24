@@ -10,7 +10,7 @@ import { skillGroups, experience } from "../data/portfolio";
 
     <div class="skills">
       {skillGroups.map((g) => (
-        <div class="group reveal">
+        <div class="group">
           <h3>{g.name}:</h3>
           <div class="tiles">
             {g.skills.map((s) => (
@@ -23,13 +23,13 @@ import { skillGroups, experience } from "../data/portfolio";
 
     <Divider />
 
-    <div class="boxhead reveal tight"><h2 id="trayectoria">Trayectoria</h2></div>
+    <div class="boxhead tight"><h2 id="trayectoria">Trayectoria</h2></div>
     <ol class="timeline">
       {experience.map((e) => (
-        <li class="reveal">
+        <li>
           <div><div class="yr">{e.period}</div><span class="tag">{e.tag}</span></div>
           <div>
-            <h4>{e.title}</h4>
+            <h3>{e.title}</h3>
             <p class="pl">{e.place}</p>
             <p>{e.description}</p>
           </div>

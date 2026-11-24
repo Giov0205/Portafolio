@@ -5,7 +5,7 @@ import { site } from "../data/portfolio";
 
 <section class="hero" id="inicio">
   <div class="hero-photo">
-    <img src={site.photo} alt={`Retrato de ${site.name}`} width="600" height="720" loading="eager" />
+    <img src={site.photo} alt={`Retrato de ${site.name}`} width="600" height="720" loading="eager" fetchpriority="high" decoding="async" />
   </div>
   <div class="wrap">
     <div class="hero-text">

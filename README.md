@@ -86,7 +86,8 @@ note: "Repositorio privado",    // se muestra cuando no hay repo
 ### Tu foto
 
 Guarda tu foto en `public/images/` y cambia `site.photo`. Se muestra en blanco
-y negro automáticamente. Ideal: vertical, de frente, buena luz y fondo liso.
+y negro automáticamente. Ideal: vertical, **de al menos 1200 px de ancho**, de
+frente, buena luz y fondo liso.
 
 ### LinkedIn
 
@@ -102,8 +103,10 @@ Aparece en Contacto y en el pie.
 
 ## 4. Cambiar colores y tipografías
 
-- **Colores:** al inicio de `src/styles/global.css`, en `:root`
-  (`--paper`, `--ink`, `--ink-2`, `--mute`, `--soft`).
+- **Colores:** al inicio de `src/styles/global.css`, en `:root`. Están
+  agrupados (fondos claros, tinta, fondos oscuros, texto sobre oscuro y
+  `--error`). Si cambias uno, revisa que el texto siga leyéndose bien
+  (contraste mínimo 4.5:1).
 - **Tipografías:** se cargan desde Google Fonts en `src/layouts/Layout.astro`
   (Raleway y Montserrat). Si cambias una, actualiza el `<link>` y los
   `font:` de `global.css`.
@@ -151,7 +154,8 @@ PortafolioTactico/
 ### Formulario de contacto
 
 El sitio no tiene servidor, así que al enviar se abre la app de correo del
-visitante con el mensaje ya escrito. Si en el futuro quieres que se envíe solo,
+visitante con el mensaje ya escrito. Si falta un dato, aparece un mensaje junto
+al campo y el cursor salta al primero que hay que corregir. Si en el futuro quieres que se envíe solo,
 puedes usar un servicio como Formspree o Netlify Forms.
 
 ---
@@ -194,5 +198,4 @@ Cada `git push` a `main` vuelve a publicar el sitio.
 | El puerto 4321 está ocupado | `npm run dev -- --port 4322` |
 | No se ve una foto | Debe estar en `public/` y la ruta empezar con `/images/...` |
 | No aparece el botón "Ver código" | `repo` está vacío en `portfolio.ts`. |
-| Una sección no aparece | Revisa la consola del navegador: el script `main.ts` la hace aparecer. |
 | Las fuentes se ven distintas | Google Fonts necesita internet. |
