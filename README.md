@@ -85,9 +85,14 @@ note: "Repositorio privado",    // se muestra cuando no hay repo
 
 ### Tu foto
 
-Guarda tu foto en `public/images/` y cambia `site.photo`. Se muestra en blanco
-y negro automáticamente. Ideal: vertical, **de al menos 1200 px de ancho**, de
-frente, buena luz y fondo liso.
+Hay dos fotos en `site`:
+
+- `photoCutout`: la del hero, **sin fondo** (PNG o WebP con transparencia, de
+  al menos 1200 px de ancho). Se apoya en el borde inferior del panel negro.
+- `photo`: una foto normal que aparece cuando compartes tu enlace en redes.
+
+Ambas se muestran en blanco y negro. Si tu herramienta de recorte deja el fondo
+blanco en vez de transparente, hay que quitarlo antes de usarla.
 
 ### LinkedIn
 

@@ -23,7 +23,7 @@ import { about } from "../data/portfolio";
     <div class="services">
       {about.services.map((s) => (
         <div class="svc">
-          <Icon name={s.icon} />
+          <span class="ic"><Icon name={s.icon} /></span>
           <h3>{s.title}</h3>
           <p>{s.text}</p>
         </div>

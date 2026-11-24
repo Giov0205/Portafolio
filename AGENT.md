@@ -34,7 +34,7 @@ Diseño profesional en **blanco y negro** inspirado en el template de Figma
    pida. El usuario **rechazó** un acento amarillo y la foto recortada.
 6. **No afirmar que algo está desplegado** si no se ejecutó el despliegue.
 7. **No inventar datos personales** ni fotos de proyectos. Las portadas SVG
-   son provisionales.
+   son provisionales. La foto del hero es `site.photoCutout` (sin fondo).
 8. **No usar logos oficiales** de tecnologías; se usan abreviaturas.
 9. **Contraste mínimo** 4.5:1 en texto normal y 3:1 en texto grande. Usar las
    variables de color de `:root`; no escribir grises sueltos.

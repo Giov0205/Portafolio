@@ -11,7 +11,7 @@
   /* Tinta y texto sobre fondo claro */
   --ink:#0d0d0d;--body:#333;--body-2:#444;--mute:#5c5c5c;--rule:#c4c4c4;
   /* Fondos oscuros */
-  --ink-2:#1a1a1a;--card:#141414;--deep:#0a0a0a;
+  --ink-2:#1a1a1a;--card:#141414;--deep:#0a0a0a;--spot:#2a2a2a;
   /* Texto sobre fondo oscuro */
   --on-dark-hi:#ddd;--on-dark:#c4c4c4;--on-dark-2:#a0a0a0;--on-dark-3:#8a8a8a;
   /* Estados */
@@ -52,9 +52,10 @@ h1,h2,h3,h4,p{margin:0}
 
 /* Hero */
 .hero{position:relative;min-height:min(100svh,940px);background:var(--paper);display:flex;align-items:center;overflow:hidden}
-.hero-photo{position:absolute;inset:0 0 0 auto;width:58%;background:var(--ink);clip-path:polygon(26% 0,100% 0,100% 100%,0 100%)}
-.hero-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:58% 22%;filter:grayscale(1) contrast(1.05)}
-.hero-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,13,13,.72),rgba(13,13,13,.05) 32%,rgba(13,13,13,0) 70%,rgba(13,13,13,.45))}
+/* Panel negro en diagonal con la foto sin fondo apoyada en el borde inferior.
+   Un foco suave detrás de la cabeza separa la figura del negro. */
+.hero-photo{position:absolute;inset:0 0 0 auto;width:58%;background:radial-gradient(55% 50% at 60% 52%,var(--spot),var(--ink) 72%);clip-path:polygon(26% 0,100% 0,100% 100%,0 100%);overflow:hidden}
+.hero-photo img{position:absolute;bottom:0;left:60%;transform:translateX(-50%);height:min(82%,740px);width:auto;max-width:none;filter:grayscale(1) contrast(1.05)}
 .hero-text{position:relative;z-index:2;padding-block:120px 80px;width:min(46%,560px)}
 .hero-text .hi{font:600 clamp(22px,2.2vw,30px)/1.2 Raleway,sans-serif}
 .hero-text h1{font:800 clamp(44px,6vw,80px)/1.02 Raleway,sans-serif;letter-spacing:-.01em;margin-top:28px;text-wrap:balance}
@@ -97,8 +98,8 @@ h1,h2,h3,h4,p{margin:0}
 .goals li{border-top:2px solid var(--ink);padding-top:18px;color:var(--body)}
 .goals li::before{content:"";display:block;width:10px;height:10px;background:var(--ink);margin-bottom:14px}
 .services{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(24px,4vw,56px)}
-.svc{position:relative;padding-left:22px}
-.svc svg{position:absolute;left:0;top:-12px;width:44px;height:44px;opacity:.16}
+.svc .ic{width:52px;height:52px;display:grid;place-items:center;border:2px solid var(--ink);margin-bottom:20px}
+.svc .ic svg{width:24px;height:24px}
 .svc h3{font:700 14px/1.2 Montserrat,sans-serif;letter-spacing:.22em;text-transform:uppercase}
 .svc p{margin-top:12px;font-size:15px;color:var(--body-2)}
 
@@ -241,7 +242,8 @@ h1,h2,h3,h4,p{margin:0}
  .links .cta{margin-top:16px;text-align:center}
  .hero{flex-direction:column;align-items:stretch;min-height:0}
  .hero-text{width:auto;padding:120px 0 72px}
- .hero-photo{position:relative;order:2;width:100%;height:min(110vw,560px);clip-path:polygon(0 14%,100% 0,100% 100%,0 100%);margin-top:-8%}
+ .hero-photo{position:relative;order:2;width:100%;height:min(110vw,560px);clip-path:polygon(0 14%,100% 0,100% 100%,0 100%);margin-top:-8%;background:radial-gradient(70% 55% at 50% 60%,var(--spot),var(--ink) 75%)}
+ .hero-photo img{left:50%;height:90%}
  .filters{flex-wrap:nowrap;overflow-x:auto;justify-content:flex-start;scrollbar-width:none}
  .filters button{flex:none}
  .about,.contact{grid-template-columns:minmax(0,1fr)}

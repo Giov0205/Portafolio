@@ -7,7 +7,7 @@
 > Última actualización: **2026-11-24**
 > Estado: **rediseño profesional (v3) migrado a Astro y corregido tras la
 > auditoría de diseño/accesibilidad**. Falta poner fotos reales de los
-> proyectos y una foto de perfil de mayor resolución.
+> proyectos.
 
 ---
 
@@ -141,9 +141,28 @@ proyecto de Claude "REDISEÑO GIO" (`auditoria-portafolio-2026-11-24.md`).
 | "Saltar al contenido" iba a Sobre mí | Ahora va a `<main id="contenido">` |
 | Botón "Enviar" poco claro | Ahora "Enviar por correo" |
 
-**No se pudo arreglar desde código:** la foto del hero mide 600 px y en
-escritorio se muestra a ~835 px, por eso se ve algo borrosa. Hace falta una foto
-de al menos 1200 px de ancho.
+**Foto del hero (resuelto después, ver abajo):** la foto anterior medía 600 px
+y se veía borrosa en escritorio.
+
+### Foto sin fondo e íconos de "Lo que hago" (2026-11-24, tercera subida)
+
+- **Foto nueva sin fondo en el hero**: el usuario agregó una versión en alta
+  resolución (2970 × 3713) recortada, pero con fondo blanco sólido (sin
+  transparencia). Se le quitó el blanco, se limpió el halo claro del pelo y los
+  hombros y se exportó como `public/images/perfil-sin-fondo.webp`
+  (1400 × 1377, ~70 KB, con transparencia; la mesa de abajo se desvanece).
+- El hero ahora muestra la figura **apoyada en el borde inferior** del panel
+  negro en diagonal, con un foco gris suave detrás (`--spot`). Ya no hay
+  degradado encima de la foto.
+- `site.photoCutout` (hero) y `site.photo` (sigue siendo `perfil.jpg`, se usa
+  para `og:image`).
+- **Íconos de "Lo que hago"**: antes iban muy tenues y encimados detrás del
+  título (imitaban el template de Tomasz) y parecían un error. Ahora cada ícono
+  va en un recuadro negro de 52 px arriba del título, igual que los cuadritos
+  de habilidades.
+- El archivo original que subió el usuario
+  (`public/images/Blue And White Simple Clean Dynamic Football Match Day Instagram Post.png`,
+  1.5 MB) **no se sube a git**; se puede borrar o mover fuera de `public/`.
 
 ---
 
@@ -185,8 +204,8 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
       Trufa; nivel en Unity) · Pokédex Arena (2–3 pantallas) ·
       API NestJS (Postman o Swagger).
       Guardarlas en `public/images/proyectos/` y listarlas en `photos`.
-- [ ] Foto de perfil de **al menos 1200 px de ancho** (la actual mide 600 px y
-      se ve borrosa en escritorio). Ideal: de frente, buena luz, fondo liso.
+- [ ] Borrar o mover fuera de `public/` el PNG original de la foto
+      (`Blue And White Simple Clean Dynamic Football Match Day Instagram Post.png`).
 - [ ] Añadir LinkedIn en `contact.linkedin` si existe.
 - [ ] **ARCUS**: repo privado; si se publica, poner URL en `repo`.
 - [ ] **Pokédex Arena**: sin repo; poner URL si se sube.
@@ -229,6 +248,10 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
 ---
 
 ## 8. Bitácora
+
+### 2026-11-24 (3) — Foto sin fondo e íconos
+- Foto nueva en alta resolución, sin fondo, en el hero.
+- Íconos de "Lo que hago" en recuadro arriba del título.
 
 ### 2026-11-24 (2) — Correcciones de la auditoría
 - Auditoría con las skills impeccable y web-design-guidelines (13/20).

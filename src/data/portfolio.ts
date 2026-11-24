@@ -21,7 +21,9 @@ export const site = {
   email: "medinagiovanni398@gmail.com",
   github: "https://github.com/Giov0205",
   githubHandle: "github.com/Giov0205",
-  /** Foto del hero: guárdala en public/images/ */
+  /** Foto sin fondo del hero (PNG o WebP con transparencia) en public/images/ */
+  photoCutout: "/images/perfil-sin-fondo.webp",
+  /** Foto normal: se usa como imagen al compartir el enlace en redes (og:image). */
   photo: "/images/perfil.jpg",
   description:
     "Giovanni Medina — Desarrollador full stack en Cancún. Proyectos web, IoT, móvil y videojuegos.",
