@@ -141,7 +141,7 @@ export const experience: TimelineEntry[] = [
   },
   {
     period: "2026",
-    tag: "En desarrollo",
+    tag: "Terminado",
     title: "Desarrollo de videojuego en equipo",
     place: "DontPetMe · Proyecto en equipo",
     description:
@@ -206,6 +206,10 @@ export type Project = {
    * La primera es la portada. Con 2 o más, la tarjeta se vuelve galería.
    */
   photos: Photo[];
+  /** Enlace para probar o descargar el proyecto (opcional), ej. itch.io. */
+  play?: string;
+  /** Texto del botón de "play" (por defecto "Ver proyecto"). */
+  playLabel?: string;
   repo: string;
   /** Texto del botón del repositorio (por defecto "Ver código"). */
   repoLabel?: string;
@@ -270,7 +274,12 @@ export const projects: Project[] = [
       "Sistema IoT para monitorear parcelas: mapa interactivo, historial de clima por minuto y gráficas de temperatura, humedad y lluvia. API propia con registro, inicio de sesión y pregunta de seguridad.",
     tech: ["React", "TypeScript", "Express", "PostgreSQL", "Sequelize", "JWT", "Mapbox", "Recharts"],
     photos: [
-      { src: "/images/proyecto-agrosense.svg", caption: "AgroSense — portada provisional" },
+      { src: "/images/proyectos/agrosense-resumen.webp", caption: "Resumen: lecturas del campo en vivo, clima de las últimas horas y alertas" },
+      { src: "/images/proyectos/agrosense-mapa.webp", caption: "Mapa satelital con las parcelas y su estado" },
+      { src: "/images/proyectos/agrosense-parcelas.webp", caption: "Parcelas: tabla con cultivo, responsable, riego y lecturas de cada sensor" },
+      { src: "/images/proyectos/agrosense-historial.webp", caption: "Historial: gráficas de temperatura, humedad, lluvia y radiación solar" },
+      { src: "/images/proyectos/agrosense-alertas.webp", caption: "Alertas por prioridad según los límites que configura el usuario" },
+      { src: "/images/proyectos/agrosense-login.webp", caption: "Inicio de sesión" },
     ],
     repo: "https://github.com/Giov0205/Clima-IOT",
   },
@@ -285,7 +294,13 @@ export const projects: Project[] = [
       "Monitor de calidad del aire con sensores: lecturas en tiempo real con medidores y gráficas, y un panel de alertas que suena una alarma cuando los valores se salen del rango.",
     tech: ["React", "TypeScript", "Tailwind CSS", "Express", "PostgreSQL", "JWT"],
     photos: [
-      { src: "/images/proyecto-airguard.svg", caption: "AirGuard — portada provisional" },
+      { src: "/images/proyectos/airguard-monitor.webp", caption: "Monitor en precaución: medidor del nivel de gas, pico del día y últimas lecturas" },
+      { src: "/images/proyectos/airguard-peligro.webp", caption: "Nivel de peligro: aviso en rojo, consejo de qué hacer y alarma sonora" },
+      { src: "/images/proyectos/airguard-seguro.webp", caption: "Aire limpio: el monitor cuando no se detecta gas" },
+      { src: "/images/proyectos/airguard-lecturas.webp", caption: "Lecturas: voltaje del sensor con zonas de seguro, precaución y peligro" },
+      { src: "/images/proyectos/airguard-alertas.webp", caption: "Alertas: cada episodio de gas con su duración y pico" },
+      { src: "/images/proyectos/airguard-ajustes.webp", caption: "Ajustes: alarma sonora, niveles del sensor y conexión con el ESP32" },
+      { src: "/images/proyectos/airguard-login.webp", caption: "Inicio de sesión" },
     ],
     repo: "https://github.com/Giov0205/Sensor-IOT",
   },
@@ -295,13 +310,24 @@ export const projects: Project[] = [
     category: "juegos",
     area: "Videojuego · Plataformas 3D",
     year: "2026",
-    status: "En desarrollo",
+    status: "Terminado",
     description:
       "Videojuego de plataformas en equipo protagonizado por Mochi, un hámster. Modelo y animo en Blender a los personajes Mochi, Copo y Trufa, y trabajo en los niveles en Unity. Colaboramos con git usando ramas por función.",
     tech: ["Unity", "C#", "Blender", "Git", "Trabajo en equipo"],
     photos: [
-      { src: "/images/proyecto-dontpetme.svg", caption: "DontPetMe — portada provisional" },
+      { src: "/images/proyectos/dontpetme-portada.webp", caption: "Logo del juego, del póster que hicimos en Blender" },
+      { src: "/images/proyectos/dontpetme-nivel0-jaula.webp", caption: "Nivel 0: la jaula de Mochi sobre la mesa del cuarto" },
+      { src: "/images/proyectos/dontpetme-mochi.webp", caption: "Mochi, el hámster protagonista, y la araña" },
+      { src: "/images/proyectos/dontpetme-enemigos.webp", caption: "Enemigos: la aspiradora robot, las hormigas y el ciempiés" },
+      { src: "/images/proyectos/dontpetme-nivel0-escritorio.webp", caption: "Nivel 0: el escritorio con lápices, ratón y taza de café" },
+      { src: "/images/proyectos/dontpetme-nivel1-cuarto.webp", caption: "Nivel 1: vista general del cuarto" },
+      { src: "/images/proyectos/dontpetme-nivel1-hormiga-reina.webp", caption: "Nivel 1: la hormiga reina en el hormiguero" },
+      { src: "/images/proyectos/dontpetme-nivel1-libros.webp", caption: "Nivel 1: libros colgantes que sirven de plataformas" },
+      { src: "/images/proyectos/dontpetme-nivel2-aspiradora.webp", caption: "Nivel 2: la aspiradora robot patrulla el pasillo" },
+      { src: "/images/proyectos/dontpetme-nivel2-alfombra.webp", caption: "Nivel 2: alfombra en zigzag y túnel de colores" },
     ],
+    play: "https://iisunnyii29.itch.io/dont-petme", // Página de itch.io para descargar y jugar
+    playLabel: "Descargar y jugar",
     repo: "https://github.com/BryanChuc2509/GDD-DONT-PET-ME", // Documento de diseño del juego (GDD)
     repoLabel: "Ver GDD",
   },
