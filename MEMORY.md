@@ -4,7 +4,7 @@
 > cambió, qué se agregó, las decisiones tomadas y lo que falta. Actualizar este
 > archivo al final de cada sesión de trabajo.
 >
-> Última actualización: **2026-11-24**
+> Última actualización: **2026-11-26**
 > Estado: **rediseño profesional (v3) migrado a Astro y corregido tras la
 > auditoría de diseño/accesibilidad**. Falta poner fotos reales de los
 > proyectos.
@@ -197,12 +197,11 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
 
 ## 5. Pendientes
 
-- [ ] **Fotos reales de los proyectos** (prioridad). ✅ EbenConta (3) y
-      ✅ ARCUS (4) ya tienen capturas; faltan los demás, que siguen con su
-      ilustración SVG provisional. Sugerencias:
-      AgroSense (mapa, gráficas) ·
-      AirGuard (medidores, alertas) · DontPetMe (renders de Mochi, Copo y
-      Trufa; nivel en Unity) · Pokédex Arena (2–3 pantallas) ·
+- [ ] **Fotos reales de los proyectos** (prioridad). ✅ EbenConta (3),
+      ✅ ARCUS (4), ✅ DontPetMe (10), ✅ AgroSense (6) y ✅ AirGuard (7) ya tienen capturas;
+      faltan los demás, que siguen con su ilustración SVG provisional.
+      Sugerencias:
+      Pokédex Arena (2–3 pantallas) ·
       API NestJS (Postman o Swagger).
       Guardarlas en `public/images/proyectos/` y listarlas en `photos`.
 - [ ] Borrar o mover fuera de `public/` el PNG original de la foto
@@ -249,6 +248,37 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
 ---
 
 ## 8. Bitácora
+
+### 2026-11-26 (4) — Capturas de AirGuard
+- **AirGuard** (Sensor-IOT) ya tiene galería con 7 capturas de la versión
+  rediseñada en `public/images/proyectos/airguard-*.webp` (monitor en
+  precaución, peligro y seguro, lecturas, alertas, ajustes e inicio de
+  sesión), a 1440 px.
+- Se tomaron con **datos simulados** del sensor de gas (el ESP32 no estaba
+  conectado). Los originales en PNG están en
+  `Sensor-IOT\capturas-portafolio\`.
+- `public/images/proyecto-airguard.svg` ya no se usa; se puede borrar.
+
+### 2026-11-26 (3) — Capturas de AgroSense
+- **AgroSense** ya tiene galería con 6 capturas de la versión remodelada en
+  `public/images/proyectos/agrosense-*.webp` (resumen, mapa, parcelas,
+  historial, alertas e inicio de sesión), tema claro a 1440 px.
+- Se tomaron con **datos simulados**: la API del campo
+  (`moriahmkt.com/iotapp/updated/`) da 404 y el backend no tiene
+  `DATABASE_URL`. Los originales en PNG están en
+  `Clima-IOT\capturas-portafolio\nuevas\`.
+- `public/images/proyecto-agrosense.svg` ya no se usa; se puede borrar.
+
+### 2026-11-26 — Fotos de DontPetMe
+- **DontPetMe** ya tiene galería con 10 imágenes en
+  `public/images/proyectos/dontpetme-*.webp` (1600 × 1000):
+  - 3 recortes del póster hecho en Blender (logo, Mochi y la araña,
+    enemigos), sacados de `Documents\Poster_DontPetMe_renders`.
+  - 7 capturas de los niveles (Nivel 0 jaula y escritorio, Nivel 1 cuarto,
+    hormiga reina y libros, Nivel 2 aspiradora y alfombra), renderizadas en
+    el Editor de Unity con la cámara del juego. Los originales en PNG
+    1920 × 1080 están en `DontPetMe\.playtest\portfolio\`.
+- `public/images/proyecto-dontpetme.svg` ya no se usa; se puede borrar.
 
 ### 2026-11-24 (6) — Capturas de ARCUS
 - **ARCUS** ya tiene galería con 4 capturas reales en

@@ -46,6 +46,9 @@ const many = p.photos.length > 1;
       {p.tech.map((t) => <li>{t}</li>)}
     </ul>
     <div class="card-a">
+      {p.play && (
+        <a class="ghost" href={p.play} target="_blank" rel="noopener noreferrer">{p.playLabel ?? "Ver proyecto"}</a>
+      )}
       {p.repo ? (
         <a class="ghost" href={p.repo} target="_blank" rel="noopener noreferrer">{p.repoLabel ?? "Ver código"}</a>
       ) : (
