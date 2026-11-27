@@ -10,8 +10,9 @@ Diseño profesional en **blanco y negro** inspirado en el template de Figma
 *Portfolio — Tomasz Gajda*.
 
 - Una sola página (`src/pages/index.astro`) con scroll y anclas.
-- Proyectos en rejilla oscura con **filtros** y **galería de fotos** por
-  proyecto, más un **visor ampliado** (lightbox).
+- Proyectos con **filtros**: los destacados (`featured: true`) en filas
+  grandes con galería, el resto en una lista compacta, una **ficha de
+  detalles** por proyecto y un **visor ampliado** (lightbox).
 - Salida estática, sin backend. El formulario usa `mailto:`.
 - Todo el contenido está en `src/data/portfolio.ts`.
 - Todo el texto visible debe estar en **español**.
@@ -73,7 +74,11 @@ npm run preview
 | `src/components/About.astro` | Sobre mí y áreas |
 | `src/components/Skills.astro` | Habilidades y trayectoria |
 | `src/components/Projects.astro` | Encabezado, filtros y rejilla |
-| `src/components/ProjectCard.astro` | Tarjeta con galería |
+| `src/components/ProjectFeature.astro` | Fila de proyecto destacado (foto grande + texto) |
+| `src/components/ProjectMini.astro` | Fila compacta de "Más proyectos" |
+| `src/components/ProjectCase.astro` | Ficha de detalles (panel con el reto, qué hice y resultado) |
+| `src/components/Gallery.astro` | Galería: foto grande, miniaturas y pie de foto |
+| `src/components/ProjectActions.astro` | Botones de cada proyecto (detalles, jugar, código) |
 | `src/components/Lightbox.astro` | Visor ampliado |
 | `src/components/Contact.astro` | Formulario `mailto:` y datos directos |
 | `src/components/Footer.astro` | Pie y toast |

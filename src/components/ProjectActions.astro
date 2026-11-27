@@ -1,0 +1,34 @@
+---
+import type { Project } from "../data/portfolio";
+
+interface Props {
+  project: Project;
+  /** true en la fila del proyecto; false en la ficha de detalles. */
+  details?: boolean;
+}
+const { project: p, details = true } = Astro.props;
+---
+
+<div class="card-a">
+  {p.demo && details && (
+    <button class="ghost" type="button" data-demo={p.id} aria-expanded="false" aria-controls={`demo-${p.id}`}>
+      Probar la app
+    </button>
+  )}
+  {p.demo && !details && (
+    <a class="ghost" href={p.demo.url} target="_blank" rel="noopener noreferrer">Probar la app</a>
+  )}
+  {details && (
+    <button class="ghost" type="button" data-case={p.id} aria-haspopup="dialog" aria-controls={`case-${p.id}`}>
+      Ver detalles
+    </button>
+  )}
+  {p.play && (
+    <a class="ghost" href={p.play} target="_blank" rel="noopener noreferrer">{p.playLabel ?? "Ver proyecto"}</a>
+  )}
+  {p.repo ? (
+    <a class="ghost" href={p.repo} target="_blank" rel="noopener noreferrer">{p.repoLabel ?? "Ver código"}</a>
+  ) : (
+    <span class="nolink">{p.note ?? "Sin repositorio público"}</span>
+  )}
+</div>

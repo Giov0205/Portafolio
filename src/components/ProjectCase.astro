@@ -1,0 +1,51 @@
+---
+import Gallery from "./Gallery.astro";
+import Icon from "./Icon.astro";
+import ProjectActions from "./ProjectActions.astro";
+import type { Project } from "../data/portfolio";
+
+interface Props {
+  project: Project;
+}
+const { project: p } = Astro.props;
+---
+
+<div class="case" id={`case-${p.id}`} role="dialog" aria-modal="true" aria-labelledby={`case-t-${p.id}`} hidden>
+  <div class="case-in">
+    <div class="case-top">
+      <div>
+        <p class="meta">{p.area} · {p.year} · {p.status}</p>
+        <h3 id={`case-t-${p.id}`}>{p.name}</h3>
+      </div>
+      <button class="case-x" type="button" data-close aria-label={`Cerrar detalles de ${p.name}`}>
+        <Icon name="close" size={22} />
+      </button>
+    </div>
+    <div class="case-body">
+      <Gallery photos={p.photos} name={p.name} />
+      <div class="case-cols">
+        <div class="case-text">
+          <section>
+            <h4>El reto</h4>
+            <p>{p.story.reto}</p>
+          </section>
+          <section>
+            <h4>Qué hice</h4>
+            <p>{p.story.hice}</p>
+          </section>
+          <section>
+            <h4>Resultado</h4>
+            <p>{p.story.resultado}</p>
+          </section>
+        </div>
+        <aside class="case-side" aria-label={`Tecnologías y enlaces de ${p.name}`}>
+          <h4>Tecnologías</h4>
+          <ul class="chips">
+            {p.tech.map((t) => <li>{t}</li>)}
+          </ul>
+          <ProjectActions project={p} details={false} />
+        </aside>
+      </div>
+    </div>
+  </div>
+</div>

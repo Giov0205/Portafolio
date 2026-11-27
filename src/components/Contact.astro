@@ -36,6 +36,7 @@ import { site, contact } from "../data/portfolio";
           {contact.linkedin && (
             <li><a href={contact.linkedin.href} target="_blank" rel="noopener noreferrer"><Icon name="linkedin" /><span><small>{contact.linkedin.label}</small><strong>{contact.linkedin.handle}</strong></span></a></li>
           )}
+          <li><a href={site.cv} download="CV_Giovanni_Medina.pdf"><Icon name="download" /><span><small>Currículum</small><strong>Descargar CV (PDF)</strong></span></a></li>
           <li><div><Icon name="pin" /><span><small>Ubicación</small><strong>{site.city}</strong></span></div></li>
         </ul>
         <button class="ghost ink copy" type="button" id="copy" data-email={site.email}>Copiar correo</button>

@@ -1,0 +1,44 @@
+---
+import Gallery from "./Gallery.astro";
+import ProjectActions from "./ProjectActions.astro";
+import type { Project } from "../data/portfolio";
+
+interface Props {
+  project: Project;
+}
+const { project: p } = Astro.props;
+---
+
+<li class="feat card" data-cat={p.category}>
+  <div class="feat-media">
+    <div class="feat-photos">
+      <Gallery photos={p.photos} name={p.name} status={p.status} />
+    </div>
+    {p.demo && (
+      <div class="demo" id={`demo-${p.id}`} hidden>
+        <div class="demo-phone">
+          <div class="demo-screen">
+            <iframe title={`${p.name} funcionando`} data-src={p.demo.url} loading="lazy"></iframe>
+          </div>
+        </div>
+        <div class="demo-side">
+          {p.demo.qr && (
+            <>
+              <img class="demo-qr" src={p.demo.qr} alt={`Código QR para abrir ${p.name} en el celular`} width="164" height="164" loading="lazy" />
+              <p>Escanéalo para abrirla en tu celular.</p>
+            </>
+          )}
+          <a class="demo-full" href={p.demo.url} target="_blank" rel="noopener noreferrer">Abrir en pantalla completa</a>
+        </div>
+      </div>
+    )}
+  </div>
+  <div class="feat-info">
+    <p class="meta">{p.area} · {p.year}</p>
+    <h3>{p.name}</h3>
+    <p class="sum">{p.summary}</p>
+    <p class="did"><span>Qué hice</span>{p.role}</p>
+    <p class="stack"><span class="sr-only">Tecnologías: </span>{p.tech.join(", ")}</p>
+    <ProjectActions project={p} />
+  </div>
+</li>

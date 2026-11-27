@@ -1,7 +1,12 @@
 ---
 import BoxHead from "./BoxHead.astro";
-import ProjectCard from "./ProjectCard.astro";
+import ProjectFeature from "./ProjectFeature.astro";
+import ProjectMini from "./ProjectMini.astro";
+import ProjectCase from "./ProjectCase.astro";
 import { projects, projectFilters } from "../data/portfolio";
+
+const featured = projects.filter((p) => p.featured);
+const minor = projects.filter((p) => !p.featured);
 ---
 
 <section class="dark" id="proyectos">
@@ -9,7 +14,7 @@ import { projects, projectFilters } from "../data/portfolio";
     <div class="wrap">
       <BoxHead
         title="Proyectos"
-        text="Aplicaciones web, sistemas IoT, una app móvil y un videojuego en equipo. Toca una imagen para verla en grande."
+        text="Aplicaciones web, sistemas IoT, una app móvil y un videojuego en equipo. Toca una foto para verla en grande o abre los detalles de cada proyecto."
       />
       <div class="filters" role="group" aria-label="Filtrar proyectos" id="filters">
         {projectFilters.map((f, i) => (
@@ -18,10 +23,19 @@ import { projects, projectFilters } from "../data/portfolio";
       </div>
     </div>
   </div>
-  <div class="wrap">
-    <ul class="grid" id="grid">
-      {projects.map((p) => <ProjectCard project={p} />)}
+  <div class="wrap projlist" id="grid">
+    <ul class="feats">
+      {featured.map((p) => <ProjectFeature project={p} />)}
     </ul>
+    {minor.length > 0 && (
+      <div class="minor" id="minor">
+        <h3 class="minor-h">Más proyectos</h3>
+        <ul class="minors">
+          {minor.map((p) => <ProjectMini project={p} />)}
+        </ul>
+      </div>
+    )}
     <p class="more">Y más en camino.</p>
   </div>
+  {projects.map((p) => <ProjectCase project={p} />)}
 </section>
