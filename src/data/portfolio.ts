@@ -21,6 +21,8 @@ export const site = {
   email: "medinagiovanni398@gmail.com",
   github: "https://github.com/Giov0205",
   githubHandle: "github.com/Giov0205",
+  /** CV en PDF dentro de public/. Para actualizarlo, reemplaza el archivo con el mismo nombre. */
+  cv: "/cv/CV_Giovanni_Medina.pdf",
   /** Foto sin fondo del hero (PNG o WebP con transparencia) en public/images/ */
   photoCutout: "/images/perfil-sin-fondo.webp",
   /** Foto normal: se usa como imagen al compartir el enlace en redes (og:image). */
@@ -32,10 +34,10 @@ export const site = {
 /** Franja negra bajo el hero. */
 export const band = {
   title: "Universidad Tecnológica de Cancún",
-  text: "Estudios universitarios en curso en Cancún, Quintana Roo. Busco prácticas profesionales donde participe en productos reales de principio a fin.",
+  text: "Estudios universitarios en curso en Cancún, Quintana Roo. Me gusta construir productos reales de principio a fin.",
   stats: [
-    { value: "07", label: "Proyectos" },
-    { value: "03", label: "Con código público" },
+    { value: "06", label: "Proyectos" },
+    { value: "02", label: "Con código público" },
     { value: "4", label: "Áreas: web, IoT, móvil, juegos" },
   ],
   mark: "UT",
@@ -150,10 +152,10 @@ export const experience: TimelineEntry[] = [
   {
     period: "2026",
     tag: "Terminado",
-    title: "Desarrollo móvil y backend",
-    place: "Pokédex Arena · API REST con NestJS",
+    title: "Desarrollo móvil",
+    place: "Brawl Dex · App de Brawl Stars",
     description:
-      "App móvil con React Native y Expo conectada a una API pública, y una API CRUD en NestJS con validación y medidas de seguridad.",
+      "App móvil con React Native y Expo conectada a la API pública de Brawlify, con buscador, filtros y favoritos.",
   },
   {
     period: "2025",
@@ -197,7 +199,14 @@ export type Project = {
   area: string;
   year: string;
   status: string;
-  description: string;
+  /** Una línea: qué es o qué hace el proyecto. */
+  summary: string;
+  /** Una línea: qué hice yo. Se ve en la fila del proyecto. */
+  role: string;
+  /** Ficha de detalles: el reto, qué hice (completo) y el resultado. */
+  story: { reto: string; hice: string; resultado: string };
+  /** true = fila grande con galería; false = lista compacta de "Más proyectos". */
+  featured?: boolean;
   tech: string[];
   /**
    * FOTOS DEL PROYECTO
@@ -206,6 +215,8 @@ export type Project = {
    * La primera es la portada. Con 2 o más, la tarjeta se vuelve galería.
    */
   photos: Photo[];
+  /** App que se puede probar dentro del portafolio (opcional): carpeta en public/ y QR para abrirla en el celular. */
+  demo?: { url: string; qr?: string };
   /** Enlace para probar o descargar el proyecto (opcional), ej. itch.io. */
   play?: string;
   /** Texto del botón de "play" (por defecto "Ver proyecto"). */
@@ -233,8 +244,14 @@ export const projects: Project[] = [
     area: "Web · Full stack",
     year: "2025",
     status: "Terminado",
-    description:
-      "Sistema para contadores: subes el XML de las facturas de cada cliente y calcula solo ingresos, egresos, balance e IVA por mes. Tablero con gráficas, seguimiento de vencimientos fiscales, filtros, exportación a CSV e inicio de sesión con código de verificación por correo.",
+    featured: true,
+    summary: "Calcula ingresos, egresos e IVA de cada cliente a partir de sus facturas XML.",
+    role: "Lo hice completo: lectura de los XML, cálculos por mes, tablero con gráficas e inicio de sesión con código por correo.",
+    story: {
+      reto: "Llevar las cuentas de varios clientes factura por factura toma mucho tiempo, y es fácil equivocarse al sumar el IVA o perder de vista una fecha fiscal.",
+      hice: "Hice el frontend en React y la API en Express con PostgreSQL. El sistema lee el XML de cada factura y separa solo los ingresos y egresos de cada cliente por mes. Agregué un tablero con gráficas, seguimiento de vencimientos fiscales, filtros, exportación a CSV e inicio de sesión con un código que llega por correo.",
+      resultado: "El contador sube las facturas y ve el balance y el IVA del mes de cada cliente en un solo tablero, listo para exportar.",
+    },
     tech: ["React", "TypeScript", "Vite", "Express", "PostgreSQL", "Sequelize", "JWT", "Nodemailer"],
     photos: [
       { src: "/images/proyectos/ebenconta-inicio.webp", caption: "Inicio: panorama del mes, resumen por cliente, avance y próximos vencimientos" },
@@ -251,8 +268,14 @@ export const projects: Project[] = [
     area: "Web · Full stack",
     year: "2026",
     status: "En uso",
-    description:
-      "Sistema de gestión de clientes y finanzas para asesores. Panel con métricas, control de pagos, metas mensuales, calendario y exportación a CSV. Inicio de sesión con Google y cada asesor ve solo sus propios clientes.",
+    featured: true,
+    summary: "Clientes, pagos y metas mensuales de cada asesor en un solo panel.",
+    role: "Lo construí con Next.js y SQLite: métricas, pagos, metas, calendario y acceso con Google.",
+    story: {
+      reto: "Los asesores necesitaban llevar a sus clientes y sus pagos en un mismo lugar, y saber cómo van con su meta del mes sin hacer cuentas a mano.",
+      hice: "Lo construí con Next.js, TypeScript y SQLite. Tiene un panel con métricas, control de pagos, metas mensuales, calendario y exportación a CSV. El inicio de sesión es con Google y cada asesor solo puede ver a sus propios clientes.",
+      resultado: "Está en uso: cada asesor revisa sus pagos pendientes y su avance del mes desde el panel.",
+    },
     tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "SQLite", "Google OAuth"],
     photos: [
       { src: "/images/proyectos/arcus-panel.webp", caption: "Panel: por cobrar hoy, clientes en recta final, cobros por mes e indicadores" },
@@ -270,8 +293,14 @@ export const projects: Project[] = [
     area: "IoT · Full stack",
     year: "2025",
     status: "Terminado",
-    description:
-      "Sistema IoT para monitorear parcelas: mapa interactivo, historial de clima por minuto y gráficas de temperatura, humedad y lluvia. API propia con registro, inicio de sesión y pregunta de seguridad.",
+    featured: true,
+    summary: "Monitorea parcelas con sensores: mapa, historial del clima y alertas.",
+    role: "Hice la API con registro e inicio de sesión, y el panel con mapa, gráficas y alertas.",
+    story: {
+      reto: "En el campo hace falta saber a tiempo si una parcela tiene demasiado calor, poca humedad o lleva días sin riego, sin tener que ir a revisarla.",
+      hice: "Hice la API en Express con registro, inicio de sesión y pregunta de seguridad, y el panel en React: mapa satelital con Mapbox, historial del clima con gráficas de temperatura, humedad, lluvia y radiación solar, y alertas con límites que el usuario ajusta.",
+      resultado: "Las lecturas de cada parcela, su historial y sus alertas quedan en un mismo panel, con las alertas ordenadas por prioridad.",
+    },
     tech: ["React", "TypeScript", "Express", "PostgreSQL", "Sequelize", "JWT", "Mapbox", "Recharts"],
     photos: [
       { src: "/images/proyectos/agrosense-resumen.webp", caption: "Resumen: lecturas del campo en vivo, clima de las últimas horas y alertas" },
@@ -290,8 +319,14 @@ export const projects: Project[] = [
     area: "IoT · Sensores",
     year: "2025",
     status: "Terminado",
-    description:
-      "Monitor de calidad del aire con sensores: lecturas en tiempo real con medidores y gráficas, y un panel de alertas que suena una alarma cuando los valores se salen del rango.",
+    featured: true,
+    summary: "Detecta gas con un sensor conectado a un ESP32 y suena una alarma si hay peligro.",
+    role: "Hice la API que recibe las lecturas del ESP32 y la app que las muestra en tiempo real.",
+    story: {
+      reto: "Una fuga de gas puede pasar desapercibida hasta que ya es peligrosa, sobre todo si nadie está mirando el sensor.",
+      hice: "Hice la API en Express que recibe las lecturas del ESP32 y las guarda en PostgreSQL, y la app en React que las muestra: un medidor con niveles de seguro, precaución y peligro, la gráfica del voltaje del sensor, el historial de episodios de gas y una alarma sonora que se puede silenciar.",
+      resultado: "La lectura se actualiza cada segundo y, en cuanto el nivel llega a peligro, la app muestra el aviso en rojo y suena la alarma.",
+    },
     tech: ["React", "TypeScript", "Tailwind CSS", "Express", "PostgreSQL", "JWT"],
     photos: [
       { src: "/images/proyectos/airguard-monitor.webp", caption: "Monitor en precaución: medidor del nivel de gas, pico del día y últimas lecturas" },
@@ -311,8 +346,14 @@ export const projects: Project[] = [
     area: "Videojuego · Plataformas 3D",
     year: "2026",
     status: "Terminado",
-    description:
-      "Videojuego de plataformas en equipo protagonizado por Mochi, un hámster. Modelo y animo en Blender a los personajes Mochi, Copo y Trufa, y trabajo en los niveles en Unity. Colaboramos con git usando ramas por función.",
+    featured: true,
+    summary: "Videojuego de plataformas 3D en equipo, protagonizado por Mochi, un hámster.",
+    role: "Modelé y animé en Blender a Mochi, Copo y Trufa, y los integré en Unity como jugador y NPC.",
+    story: {
+      reto: "Hacer en equipo un juego de plataformas completo, con personajes propios y varios niveles, mientras todos trabajamos al mismo tiempo sobre el mismo proyecto.",
+      hice: "Modelé y animé en Blender a los personajes Mochi, Copo y Trufa, y los integré en Unity con C# como jugador y NPC. Para no pisarnos el trabajo, colaboramos con git usando una rama por función.",
+      resultado: "El juego está terminado y publicado en itch.io, donde se puede descargar y jugar.",
+    },
     tech: ["Unity", "C#", "Blender", "Git", "Trabajo en equipo"],
     photos: [
       { src: "/images/proyectos/dontpetme-portada.webp", caption: "Logo del juego, del póster que hicimos en Blender" },
@@ -332,35 +373,30 @@ export const projects: Project[] = [
     repoLabel: "Ver GDD",
   },
   {
-    id: "pokedex-arena",
-    name: "Pokédex Arena",
+    id: "brawl-dex",
+    name: "Brawl Dex",
     category: "movil",
     area: "App móvil",
     year: "2026",
     status: "Terminado",
-    description:
-      "App móvil que consume la PokéAPI en tiempo real: pantalla de inicio animada, búsqueda por nombre, filtro por tipo, detalle con estadísticas y favoritos guardados en el teléfono. Actividad de la UT Cancún.",
-    tech: ["React Native", "Expo", "JavaScript", "Axios", "AsyncStorage"],
+    featured: true,
+    summary: "App móvil de Brawl Stars con los datos del juego en vivo: brawlers, gadgets y star powers.",
+    role: "La hice con React Native y Expo, consumiendo la API pública de Brawlify.",
+    story: {
+      reto: "Fue una actividad de la UT Cancún: hacer una app móvil que consuma la API real de un videojuego y que se sienta parte del juego.",
+      hice: "La hice con React Native y Expo: pantalla de carga animada, inicio con el brawler del día, lista con buscador y filtros por rareza, detalle de cada brawler con sus star powers y gadgets, y favoritos. Los datos vienen de la API de Brawlify, con una segunda dirección de respaldo, y se guardan en memoria para no descargarlos otra vez.",
+      resultado: "Muestra en tiempo real los 108 brawlers con sus 216 gadgets y 216 star powers, con un estilo inspirado en el menú del juego.",
+    },
+    tech: ["React Native", "Expo", "JavaScript", "API REST (Brawlify)"],
     photos: [
-      { src: "/images/proyecto-pokedex.svg", caption: "Pokédex Arena — portada provisional" },
+      { src: "/images/proyectos/brawl-portada.webp", caption: "Lista de brawlers, inicio y detalle de un brawler" },
+      { src: "/images/proyectos/brawl-inicio.webp", caption: "Pantalla de carga y pantalla de inicio con el brawler del día" },
+      { src: "/images/proyectos/brawl-lista.webp", caption: "Lista de brawlers con buscador y filtros por rareza" },
+      { src: "/images/proyectos/brawl-detalle.webp", caption: "Detalle de un brawler con su rareza, clase y star powers" },
     ],
-    repo: "", // Si lo subes a GitHub, pon aquí el enlace.
-    note: "Sin repositorio público",
-  },
-  {
-    id: "api-nestjs",
-    name: "API REST con NestJS",
-    category: "web",
-    area: "Backend · API",
-    year: "2026",
-    status: "Terminado",
-    description:
-      "API CRUD hecha con buenas prácticas de seguridad: validación y limpieza de datos, cabeceras seguras con Helmet y límite de peticiones para evitar abusos.",
-    tech: ["NestJS", "TypeScript", "TypeORM", "PostgreSQL", "Helmet"],
-    photos: [
-      { src: "/images/proyecto-api.svg", caption: "API REST con NestJS — portada provisional" },
-    ],
-    repo: "https://github.com/Giov0205/Backend-CRUD",
+    demo: { url: "/demos/brawl-dex/index.html", qr: "/images/proyectos/brawl-qr.svg" },
+    repo: "", // Repositorio privado: si lo publicas, pon aquí el enlace.
+    note: "Repositorio privado",
   },
 ];
 
@@ -368,7 +404,7 @@ export const projects: Project[] = [
 export const contact = {
   intro: "¿Tienes una idea, un proyecto o una vacante? Escríbeme y coordinamos.",
   status: "Disponible",
-  statusText: "Para prácticas profesionales, colaboraciones y proyectos.",
+  statusText: "Para colaboraciones y proyectos.",
   /** Si tienes LinkedIn, agrégalo: { label: "LinkedIn", handle: "linkedin.com/in/tu-usuario", href: "https://www.linkedin.com/in/tu-usuario/" } */
   linkedin: null as null | { label: string; handle: string; href: string },
 };

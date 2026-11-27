@@ -1,0 +1,42 @@
+---
+import type { Photo } from "../data/portfolio";
+
+interface Props {
+  photos: Photo[];
+  name: string;
+  /** Etiqueta de estado sobre la foto (opcional). */
+  status?: string;
+  /** "lazy" para filas de la página; "eager" no hace falta en la ficha porque está oculta. */
+  loading?: "lazy" | "eager";
+}
+const { photos, name, status, loading = "lazy" } = Astro.props;
+const first = photos[0];
+const many = photos.length > 1;
+---
+
+<div class="gal" data-name={name} data-photos={JSON.stringify(photos)}>
+  <div class="gal-stage">
+    <button class="gal-main" type="button" data-i="0" aria-label={`Ver en grande: ${first.caption}`}>
+      <img src={first.src} alt={first.caption} width="1600" height="1000" loading={loading} decoding="async" />
+    </button>
+    {status && <span class="st">{status.toUpperCase()}</span>}
+  </div>
+  {many && (
+    <ul class="gal-thumbs" aria-label={`Fotos de ${name}`}>
+      {photos.map((ph, i) => (
+        <li>
+          <button
+            class="gal-th"
+            type="button"
+            data-i={i}
+            aria-label={`Foto ${i + 1} de ${photos.length}: ${ph.caption}`}
+            aria-pressed={i === 0 ? "true" : "false"}
+          >
+            <img src={ph.src} alt="" width="160" height="100" loading="lazy" decoding="async" />
+          </button>
+        </li>
+      ))}
+    </ul>
+  )}
+  <p class="gal-cap" aria-live="polite">{first.caption}</p>
+</div>

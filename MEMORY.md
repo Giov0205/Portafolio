@@ -249,6 +249,62 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
 
 ## 8. Bitácora
 
+### 2026-11-26 (9) — Se quitó la API REST con NestJS
+- Ya no está en Proyectos ni en Trayectoria; la sección "Más proyectos" no
+  aparece porque quedó vacía. Cifras de la franja: 06 proyectos, 02 con
+  código público. NestJS sigue en Habilidades.
+
+### 2026-11-26 (8) — Brawl Dex se puede probar dentro del portafolio
+- Botón **"Probar la app"** en la fila de Brawl Dex: cambia las fotos por un
+  celular con la app real funcionando (iframe a 390 × 844 reducido con
+  `transform: scale`) y un **QR** para abrirla en el celular.
+- La app es la exportación web de Expo en `public/demos/brawl-dex/`
+  (`experiments.baseUrl: "/demos/brawl-dex"`, ~4.8 MB, casi todo fuentes de
+  íconos). Se exportó desde una copia temporal; el proyecto original no se
+  tocó. Para actualizarla, volver a exportar y reemplazar la carpeta.
+  Después de exportar: mover las fuentes a `assets/fonts/` y cambiar en el
+  bundle la ruta `.../node_modules/@expo/vector-icons/...` por
+  `/demos/brawl-dex/assets/fonts` (el servidor de desarrollo de Astro no
+  sirve rutas con `@`). El iframe apunta a `index.html` por la misma razón.
+- Campo nuevo opcional `demo: { url, qr }` en `Project`. QR en
+  `public/images/proyectos/brawl-qr.svg` apunta a
+  https://portafolio-plum-five-15.vercel.app/demos/brawl-dex/ (si cambia el
+  dominio, regenerar el QR).
+
+### 2026-11-26 (7) — Brawl Dex en lugar de Pokédex Arena
+- Se quitó Pokédex Arena y se agregó **Brawl Dex** (app móvil de Brawl Stars,
+  `Documents\BrawlStarsApp\BrawlStarsApp`, Expo) como proyecto destacado.
+- Sus 4 fotos (`brawl-*.webp`) muestran capturas reales de la app (versión
+  web de Expo a 390 px) dentro de marcos de celular, sobre fondo azul.
+  Originales en `.claude/capturas-diseno/brawl/`.
+- Repositorio `Giov0205/BRAWLAPI` es privado (o no existe públicamente).
+- En Trayectoria, "Pokédex Arena" cambió por "Brawl Dex".
+
+### 2026-11-26 (6) — CV descargable y ficha más compacta
+- CV en `public/cv/CV_Giovanni_Medina.pdf` (`site.cv`). Botón "Descargar CV"
+  en el hero y fila "Currículum" en Contacto. Para actualizarlo, reemplazar
+  el PDF con el mismo nombre.
+- El CV se rehízo (mismo diseño, Liberation Serif) con el enlace del
+  portafolio en el encabezado en vez de GitHub. Incluye el teléfono.
+- La ficha de detalles ahora cabe en pantalla: foto a la izquierda y texto a
+  la derecha; en celular ocupa toda la pantalla.
+- DontPetMe: el texto dice que integró a los personajes en Unity como jugador
+  y NPC (como en su CV).
+
+### 2026-11-26 (5) — Nueva sección de proyectos (A + C)
+- Los proyectos con `featured: true` (EbenConta, ARCUS, AgroSense, AirGuard y
+  DontPetMe) se muestran en **filas grandes**: foto a color con miniaturas y
+  pie de foto, y a un lado resumen, "Qué hice", tecnologías y botones. La foto
+  alterna de lado (clase `flip`, la pone `main.ts` según los visibles).
+- Pokédex Arena y la API de NestJS van en **"Más proyectos"**, lista compacta.
+- Cada proyecto tiene una **ficha de detalles** (`ProjectCase.astro`) con
+  galería, "El reto", "Qué hice" y "Resultado" (campo `story`).
+- Campos nuevos en `Project`: `summary`, `role`, `story`, `featured`; se quitó
+  `description` y `ProjectCard.astro`.
+- Movimiento solo como respuesta a una acción: cambio suave de foto y entrada
+  del panel; respeta `prefers-reduced-motion`.
+- Quitado "busco prácticas profesionales" de la franja y de Contacto.
+
 ### 2026-11-26 (4) — Capturas de AirGuard
 - **AirGuard** (Sensor-IOT) ya tiene galería con 7 capturas de la versión
   rediseñada en `public/images/proyectos/airguard-*.webp` (monitor en
