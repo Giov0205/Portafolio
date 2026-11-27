@@ -332,3 +332,7 @@ h1,h2,h3,h4,p{margin:0}
 /* Utilidades de sección */
 .section.no-top{padding-top:0}
 .boxhead.tight{margin-bottom:32px}
+
+/* Sin barra de desplazamiento visible: la página se sigue moviendo con la rueda, el teclado o el dedo. */
+html,.case,.case-body,.gal-thumbs{scrollbar-width:none}
+html::-webkit-scrollbar,.case::-webkit-scrollbar,.case-body::-webkit-scrollbar,.gal-thumbs::-webkit-scrollbar{display:none}
