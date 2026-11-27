@@ -249,6 +249,14 @@ Abrir http://localhost:4321. Leer `AGENT.md` antes de editar. Verificar con
 
 ## 8. Bitácora
 
+### 2026-11-27 — FitPro agregado
+- Nuevo proyecto destacado **FitPro** (estado: Terminado) (`Documents\\FitPro`, repo privado
+  Giov0205/FitPro) con 7 fotos `fitpro-*.webp`: 6 de escritorio y 1 con tres
+  celulares. Capturas con **datos simulados** (usuario de ejemplo "Carlos
+  Méndez" en modo demo, sin API). Originales en `FitPro\\.capturas-portafolio\\`.
+- Cifra de la franja: 07 proyectos.
+- Scroll del demo de Brawl Dex oculto (CSS en su `index.html`).
+
 ### 2026-11-26 (9) — Se quitó la API REST con NestJS
 - Ya no está en Proyectos ni en Trayectoria; la sección "Más proyectos" no
   aparece porque quedó vacía. Cifras de la franja: 06 proyectos, 02 con
