@@ -36,7 +36,7 @@ export const band = {
   title: "Universidad Tecnológica de Cancún",
   text: "Estudios universitarios en curso en Cancún, Quintana Roo. Me gusta construir productos reales de principio a fin.",
   stats: [
-    { value: "06", label: "Proyectos" },
+    { value: "07", label: "Proyectos" },
     { value: "02", label: "Con código público" },
     { value: "4", label: "Áreas: web, IoT, móvil, juegos" },
   ],
@@ -282,6 +282,34 @@ export const projects: Project[] = [
       { src: "/images/proyectos/arcus-clientes.webp", caption: "Clientes: tabla con ciclo de 47 días, estatus de pago, búsqueda y filtros" },
       { src: "/images/proyectos/arcus-finanzas.webp", caption: "Finanzas: facturado, cobrado y pendiente del mes, meta mensual y desglose" },
       { src: "/images/proyectos/arcus-calendario.webp", caption: "Calendario del mes con los cobros de cada cliente según su ciclo" },
+    ],
+    repo: "", // Repositorio privado: si lo publicas, pon aquí el enlace.
+    note: "Repositorio privado",
+  },
+  {
+    id: "fitpro",
+    name: "FitPro",
+    category: "web",
+    area: "Web · Full stack",
+    year: "2026",
+    status: "Terminado",
+    featured: true,
+    summary: "App web de entrenamiento: rutinas guiadas, registro de cargas y peso, y tu progreso de cada semana.",
+    role: "La hice completa: el front en React y TypeScript, y la API en Express con PostgreSQL.",
+    story: {
+      reto: "Mucha gente entrena sin un plan y no sabe si de verdad está avanzando. Quería una app que arme las rutinas según tu objetivo y te muestre tu progreso semana a semana.",
+      hice: "Hice el front con React 19, TypeScript y Vite, con modo claro y oscuro e íconos propios, y la API con Express y PostgreSQL: registro e inicio de sesión con contraseñas cifradas, validación con Zod y límite de peticiones. Tiene 4 programas con sus rutinas, sesiones con cronómetro y descanso automático, registro de cargas por ejercicio, gráfica de peso, calendario de actividad y logros. También funciona en modo demo, guardando todo en el navegador.",
+      resultado: "Cada usuario ve en su panel cuántos entrenamientos lleva contra su meta de la semana, su racha y su peso, y en Progreso cómo suben sus cargas.",
+    },
+    tech: ["React", "TypeScript", "Vite", "Express", "PostgreSQL", "Zod"],
+    photos: [
+      { src: "/images/proyectos/fitpro-panel.webp", caption: "Panel: tu semana en anillos, racha, siguiente rutina y peso" },
+      { src: "/images/proyectos/fitpro-movil.webp", caption: "En celular: progreso, panel y una sesión en curso" },
+      { src: "/images/proyectos/fitpro-rutinas.webp", caption: "Rutinas por programa con sus ejercicios, series y repeticiones" },
+      { src: "/images/proyectos/fitpro-sesion.webp", caption: "Sesión con cronómetro: marcas cada ejercicio y anotas los kilos" },
+      { src: "/images/proyectos/fitpro-progreso.webp", caption: "Progreso: gráfica de peso, IMC, cargas por ejercicio y calendario" },
+      { src: "/images/proyectos/fitpro-perfil.webp", caption: "Perfil: datos, objetivo, nivel, meta semanal y plan" },
+      { src: "/images/proyectos/fitpro-inicio.webp", caption: "Página de inicio con los anillos de actividad" },
     ],
     repo: "", // Repositorio privado: si lo publicas, pon aquí el enlace.
     note: "Repositorio privado",
